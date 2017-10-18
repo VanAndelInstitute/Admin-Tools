@@ -1,0 +1,104 @@
+#!/usr/bin/perl
+use Time::Local;
+use Term::ANSIColor;
+use Data::Dumper;
+
+die "already running" if `pgrep pbsnodezParsable`;
+
+@duout = `df /primary /secondary`;
+$diskTotal = (split(/\s+/,$duout[1]))[2];
+$diskTotal += (split(/\s+/,$duout[2]))[2];
+$lastDiskTotal  = `cat /primary/vari/admin/tools/pbsnodezParsable/lastDu` || $diskTotal;
+chomp $lastDiskTotal;
+$diskTotalChange = abs($diskTotal - $lastDiskTotal);
+system("echo $diskTotal > /primary/vari/admin/tools/pbsnodezParsable/lastDu");
+
+my $lastJobID = `qmgr -c "p s" |grep next_job_number`;
+$lastJobID =~ /.+ (\d+)$/;
+$lastJobID = $1;
+$output = `pbsnodes`;
+$zstatout = `/primary/vari/software/zacks_usc_devel/zacks_PBS_Tools/zstat.pl all`;
+foreach my $line (split '\n', $zstatout)
+{
+	chomp $line;
+	$line =~ s/[\000-\037]\[(\d|;)+m//g;;
+	$line =~ s/^\s+//;
+	$line =~ s/\s+/|/g;
+	my @z = split(/\|/, $line);
+	$zstat{$z[0]} = [@z];
+}
+
+@nodes = split "\n\n", $output;
+
+foreach  $n (@nodes)
+{
+	my @lines = split "\n", $n;
+	$node = $lines[0];
+	chomp $node;
+	for $l (@lines)
+	{
+		if( $l =~ /\s*(\S*)\s+\=\s+(.+)$/)
+		{
+			$nodeprops{$node}{$1} = $2;
+
+		}
+	}
+
+}
+
+
+
+my $totalLoad = 0.0;
+print `cat /primary/vari/admin/tools/pbsnodezParsable/loadHistory | xargs`;
+print `cat /primary/vari/admin/tools/pbsnodezParsable/diskHistory | xargs`;
+foreach $k (sort keys %nodeprops)
+{
+	my %nodejobs;
+	#my %detailedProps = map { $_ =~ /(.+)\=(.+)/,  2} split /\,/, $nodeprops{$k}{status};
+	my $cleanStatus = $nodeprops{$k}{status};
+	$cleanStatus =~ s/\(.+\)//g;
+	my %detailedProps = split /[,=]/, $cleanStatus;
+	
+	$nodeprops{$k}{jobs} =~ s/\-\d+.master.cm.cluster//g;
+	$nodeprops{$k}{jobs} =~ s/\[.+\]//g;
+	$nodeprops{$k}{jobs} =~ s/.master.cm.cluster//g;
+	$nodeprops{$k}{jobs} =~ s/ //g;
+	for my $core ( split ",",$nodeprops{$k}{jobs})
+	{
+		my $jobNum = $core;
+		$jobNum =~ s/[\d-]+\///g;
+		my $coreNum = $core;
+		$coreNum =~ s/\/.+//;
+		$nodejobsCores{$jobNum} = $coreNum;
+	}
+	$nodeprops{$k}{jobs} =~ s/[\d-]+\///g;
+	$nodejobs{$_} ++  for split ",",$nodeprops{$k}{jobs};
+	print "$k\t $nodeprops{$k}{np}\t$diskTotalChange\t";
+	print "$detailedProps{loadave}\t";  
+	$totalLoad += $detailedProps{loadave} ;
+
+	my @users;my @coresUsed; my @jobsIds;
+	for (keys %nodejobs)
+	{
+		push @users, $zstat{$_}[2] ? $zstat{$_}[2] : "hpc.admin";
+		$nodejobsCores{$_} =~ /(\d+)-(\d+)/;
+		my $coreSum = 1 + ($2 - $1);
+
+		push @coresUsed,$coreSum;
+		my $k = $_;
+		$k=~ s/\-//g;
+		push @jobsIds, $k;	
+	}
+	print join(",",@users) . "\t" . join(",",@coresUsed) . "\t" . join(",",@jobsIds);
+
+	print "\n";
+}
+print "node000\t0\t$diskTotalChange\t0.00\thpc.admin\t1\t$lastJobID\n";
+system("echo $totalLoad >> /primary/vari/admin/tools/pbsnodezParsable/loadHistory");
+system("echo $diskTotalChange >> /primary/vari/admin/tools/pbsnodezParsable/diskHistory");
+
+system("tail -n 60 /primary/vari/admin/tools/pbsnodezParsable/loadHistory > /primary/vari/admin/tools/pbsnodezParsable/loadHistory2");
+system("mv /primary/vari/admin/tools/pbsnodezParsable/loadHistory2 /primary/vari/admin/tools/pbsnodezParsable/loadHistory");
+
+system("tail -n 60 /primary/vari/admin/tools/pbsnodezParsable/diskHistory > /primary/vari/admin/tools/pbsnodezParsable/diskHistory2");
+system("mv /primary/vari/admin/tools/pbsnodezParsable/diskHistory2 /primary/vari/admin/tools/pbsnodezParsable/diskHistory");

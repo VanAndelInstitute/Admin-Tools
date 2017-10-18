@@ -1,0 +1,1097 @@
+node025
+     state = job-exclusive
+     power_state = Running
+     np = 28
+     ntype = cluster
+     jobs = 0-27/290960.master.cm.cluster
+     status = rectime=1502214459,macaddr=0c:c4:7a:64:3d:c6,cpuclock=Fixed,varattr=,jobs=290960.master.cm.cluster(cput=29432706,energy_used=0,mem=191448kb,vmem=7050896kb,walltime=1051213,session_id=43515),state=free,netload=177118532286839,gres=,loadave=28.00,ncpus=56,physmem=264042652kb,availmem=263811832kb,totmem=276625560kb,idletime=1117187,nusers=1,nsessions=30,sessions=43515 43570 43571 43572 43573 43574 43575 43576 43577 43578 43579 43580 43581 43582 43583 43584 43585 43586 43587 43588 43589 43590 43591 43592 43593 43594 43595 43596 43597 43598,uname=Linux node025 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 28
+
+node040
+     state = job-exclusive
+     power_state = Running
+     np = 28
+     ntype = cluster
+     jobs = 0-1/340289.master.cm.cluster,2-27/340294.master.cm.cluster
+     status = rectime=1502214454,macaddr=00:25:90:fd:d2:ba,cpuclock=Fixed,varattr=,jobs=340289.master.cm.cluster(cput=82,energy_used=0,mem=1421312kb,vmem=2725192kb,walltime=5373,Error_Path=/dev/pts/0,Output_Path=/dev/pts/0,session_id=33231) 340294.master.cm.cluster(cput=103752,energy_used=0,mem=45509388kb,vmem=49799788kb,walltime=4118,session_id=37784),state=free,netload=2155790317324169,gres=,loadave=25.98,ncpus=56,physmem=264042648kb,availmem=254238116kb,totmem=276625556kb,idletime=349374,nusers=2,nsessions=36,sessions=37784 37875 37876 37877 37878 37879 37880 37881 37882 37883 37884 37885 37886 37887 37888 37889 37890 37891 37892 37893 37894 37895 37896 37897 37898 37899 37900 37901 37902 37903 37904 37905 37906 37907 37908 33231,uname=Linux node040 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 28
+
+node039
+     state = job-exclusive
+     power_state = Running
+     np = 28
+     ntype = cluster
+     jobs = 0-27/340294.master.cm.cluster
+     status = rectime=1502214461,macaddr=00:25:90:fd:d4:4a,cpuclock=Fixed,varattr=,jobs=340294.master.cm.cluster,state=free,netload=2852712611988724,gres=,loadave=27.96,ncpus=56,physmem=264042648kb,availmem=254351360kb,totmem=276625556kb,idletime=2934965,nusers=0,nsessions=0,uname=Linux node039 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 28
+
+node036
+     state = job-exclusive
+     power_state = Running
+     np = 28
+     ntype = cluster
+     jobs = 0-27/340294.master.cm.cluster
+     status = rectime=1502214467,macaddr=00:25:90:fc:85:1a,cpuclock=Fixed,varattr=,jobs=340294.master.cm.cluster,state=free,netload=2413598937298965,gres=,loadave=27.95,ncpus=56,physmem=264042608kb,availmem=221267852kb,totmem=276625516kb,idletime=4389435,nusers=0,nsessions=0,uname=Linux node036 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 28
+
+node035
+     state = job-exclusive
+     power_state = Running
+     np = 28
+     ntype = cluster
+     jobs = 0-27/340294.master.cm.cluster
+     status = rectime=1502214462,macaddr=00:25:90:fc:48:5e,cpuclock=Fixed,varattr=,jobs=340294.master.cm.cluster,state=free,netload=2510244573520166,gres=,loadave=27.98,ncpus=56,physmem=264036372kb,availmem=254920428kb,totmem=276619280kb,idletime=3982534,nusers=0,nsessions=0,uname=Linux node035 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 28
+
+node034
+     state = job-exclusive
+     power_state = Running
+     np = 28
+     ntype = cluster
+     jobs = 0-27/340294.master.cm.cluster
+     status = rectime=1502214461,macaddr=00:25:90:fc:47:3c,cpuclock=Fixed,varattr=,jobs=340294.master.cm.cluster,state=free,netload=2889443839110941,gres=,loadave=28.00,ncpus=56,physmem=264042644kb,availmem=255083084kb,totmem=276625552kb,idletime=10224476,nusers=0,nsessions=0,uname=Linux node034 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 28
+
+node033
+     state = job-exclusive
+     power_state = Running
+     np = 28
+     ntype = cluster
+     jobs = 0-27/340294.master.cm.cluster
+     status = rectime=1502214463,macaddr=0c:c4:7a:64:3e:ac,cpuclock=Fixed,varattr=,jobs=340294.master.cm.cluster,state=free,netload=3081251609236004,gres=,loadave=27.96,ncpus=56,physmem=264042644kb,availmem=255041132kb,totmem=276625552kb,idletime=7749023,nusers=0,nsessions=0,uname=Linux node033 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 28
+
+node032
+     state = job-exclusive
+     power_state = Running
+     np = 28
+     ntype = cluster
+     jobs = 0-27/340294.master.cm.cluster
+     status = rectime=1502214469,macaddr=00:25:90:fd:d4:b2,cpuclock=Fixed,varattr=,jobs=340294.master.cm.cluster,state=free,netload=3120593188762978,gres=,loadave=27.96,ncpus=56,physmem=264042648kb,availmem=215727988kb,totmem=276625556kb,idletime=5515685,nusers=0,nsessions=0,uname=Linux node032 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 28
+
+node031
+     state = job-exclusive
+     power_state = Running
+     np = 28
+     ntype = cluster
+     jobs = 0-5/340294.master.cm.cluster,6-25/340296.master.cm.cluster,26/340297.master.cm.cluster,27/340298.master.cm.cluster
+     status = rectime=1502214449,macaddr=00:25:90:fd:d1:40,cpuclock=Fixed,varattr=,jobs=340294.master.cm.cluster 340296.master.cm.cluster(cput=1667,energy_used=0,mem=143036kb,vmem=310676kb,walltime=1680,session_id=26047) 340297.master.cm.cluster(cput=973,energy_used=0,mem=84140kb,vmem=825600kb,walltime=978,session_id=26662) 340298.master.cm.cluster(cput=966,energy_used=0,mem=76700kb,vmem=825600kb,walltime=969,session_id=26712),state=free,netload=1478403423918066,gres=,loadave=9.00,ncpus=56,physmem=264042648kb,availmem=261722408kb,totmem=276625556kb,idletime=966089,nusers=2,nsessions=3,sessions=26712 26662 26047,uname=Linux node031 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 28
+
+node030
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     jobs = 0-19/340296.master.cm.cluster,20/340299.master.cm.cluster,21/340300.master.cm.cluster,22/340301.master.cm.cluster,23/340302.master.cm.cluster,24/340303.master.cm.cluster,25/340304.master.cm.cluster
+     status = rectime=1502214450,macaddr=00:25:90:fd:d4:46,cpuclock=Fixed,varattr=,jobs=340296.master.cm.cluster 340299.master.cm.cluster(cput=964,energy_used=0,mem=64448kb,vmem=825600kb,walltime=968,session_id=56403) 340300.master.cm.cluster(cput=964,energy_used=0,mem=62392kb,vmem=825600kb,walltime=965,session_id=56452) 340301.master.cm.cluster(cput=953,energy_used=0,mem=101304kb,vmem=825600kb,walltime=963,session_id=56502) 340302.master.cm.cluster(cput=958,energy_used=0,mem=41796kb,vmem=825600kb,walltime=959,session_id=56553) 340303.master.cm.cluster(cput=956,energy_used=0,mem=50124kb,vmem=825600kb,walltime=957,session_id=56604) 340304.master.cm.cluster(cput=951,energy_used=0,mem=189372kb,vmem=825600kb,walltime=954,session_id=56653),state=free,netload=3362712781263949,gres=,loadave=6.32,ncpus=56,physmem=264042648kb,availmem=264192048kb,totmem=276625556kb,idletime=526058,nusers=1,nsessions=6,sessions=56653 56604 56553 56502 56452 56403,uname=Linux node030 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 26
+
+node029
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214445,macaddr=00:25:90:fd:d1:3e,cpuclock=Fixed,varattr=,jobs=,state=free,netload=3521490439999554,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=264546772kb,totmem=276625556kb,idletime=4932077,nusers=0,nsessions=0,uname=Linux node029 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node028
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214439,macaddr=00:25:90:fd:d3:e4,cpuclock=Fixed,varattr=,jobs=,state=free,netload=108439176494534,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=264211100kb,totmem=276625556kb,idletime=1799695,nusers=0,nsessions=0,uname=Linux node028 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node027
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214439,macaddr=00:25:90:fd:d4:44,cpuclock=Fixed,varattr=,jobs=,state=free,netload=991184592239902,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=264134852kb,totmem=276625556kb,idletime=4852559,nusers=0,nsessions=0,uname=Linux node027 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node026
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214467,macaddr=00:25:90:fd:d1:46,cpuclock=Fixed,varattr=,jobs=,state=free,netload=1392192857327259,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=263943112kb,totmem=276625556kb,idletime=1018971,nusers=0,nsessions=0,uname=Linux node026 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node024
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214449,macaddr=00:25:90:fd:d4:24,cpuclock=Fixed,varattr=,jobs=,state=free,netload=1328027909317177,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=263809056kb,totmem=276625556kb,idletime=3551609,nusers=0,nsessions=0,uname=Linux node024 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node023
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214431,macaddr=00:25:90:fd:d3:de,cpuclock=Fixed,varattr=,jobs=,state=free,netload=1275000196551309,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=264083128kb,totmem=276625556kb,idletime=10161037,nusers=0,nsessions=0,uname=Linux node023 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node022
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214450,macaddr=00:25:90:fd:d1:3c,cpuclock=Fixed,varattr=,jobs=,state=free,netload=1533578066068628,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=264077248kb,totmem=276625556kb,idletime=4762042,nusers=0,nsessions=0,uname=Linux node022 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node021
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214464,macaddr=00:25:90:fd:d3:dc,cpuclock=Fixed,varattr=,jobs=,state=free,netload=2933354883398369,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=264301796kb,totmem=276625556kb,idletime=10224491,nusers=0,nsessions=0,uname=Linux node021 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node020
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214432,macaddr=00:25:90:fd:d4:1a,cpuclock=Fixed,varattr=,jobs=,state=free,netload=3184143858425591,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=264374088kb,totmem=276625556kb,idletime=2920680,nusers=0,nsessions=0,uname=Linux node020 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node019
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214439,macaddr=00:25:90:fd:d4:30,cpuclock=Fixed,varattr=,jobs=,state=free,netload=1634049165821703,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=264087128kb,totmem=276625556kb,idletime=10224469,nusers=0,nsessions=0,uname=Linux node019 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node018
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214441,macaddr=00:25:90:fd:d4:2c,cpuclock=Fixed,varattr=,jobs=,state=free,netload=1500851315097333,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=264169476kb,totmem=276625556kb,idletime=10224470,nusers=0,nsessions=0,uname=Linux node018 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node017
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214463,macaddr=00:25:90:fd:d4:4c,cpuclock=Fixed,varattr=,jobs=,state=free,netload=1200423042909634,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=263881548kb,totmem=276625556kb,idletime=1806695,nusers=0,nsessions=0,uname=Linux node017 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node016
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214446,macaddr=00:25:90:5c:76:1e,cpuclock=Fixed,varattr=,jobs=,state=free,netload=3330604157303915,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=263921200kb,totmem=276625556kb,idletime=443390,nusers=0,nsessions=0,uname=Linux node016 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node015
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214464,macaddr=00:25:90:5c:76:06,cpuclock=Fixed,varattr=,jobs=,state=free,netload=696108193780517,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=263963588kb,totmem=276625556kb,idletime=7486264,nusers=0,nsessions=0,uname=Linux node015 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node014
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214452,macaddr=00:25:90:fc:84:26,cpuclock=Fixed,varattr=,jobs=,state=free,netload=2345582127425526,gres=,loadave=0.00,ncpus=56,physmem=264042644kb,availmem=263965840kb,totmem=276625552kb,idletime=10187967,nusers=0,nsessions=0,uname=Linux node014 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node013
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214465,macaddr=00:25:90:5c:76:1a,cpuclock=Fixed,varattr=,jobs=,state=free,netload=582248935372078,gres=,loadave=0.01,ncpus=56,physmem=264042648kb,availmem=264165536kb,totmem=276625556kb,idletime=4379369,nusers=0,nsessions=0,uname=Linux node013 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node012
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214450,macaddr=00:25:90:fd:79:62,cpuclock=Fixed,varattr=,jobs=,state=free,netload=681411706109128,gres=,loadave=0.00,ncpus=56,physmem=264042652kb,availmem=264089460kb,totmem=276625560kb,idletime=7178154,nusers=0,nsessions=0,uname=Linux node012 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node011
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214446,macaddr=00:25:90:fd:79:42,cpuclock=Fixed,varattr=,jobs=,state=free,netload=472371226760722,gres=,loadave=0.02,ncpus=56,physmem=264042652kb,availmem=263591180kb,totmem=276625560kb,idletime=5283574,nusers=0,nsessions=0,uname=Linux node011 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node010
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214440,macaddr=00:25:90:fd:78:a2,cpuclock=Fixed,varattr=,jobs=,state=free,netload=83807278184357,gres=,loadave=0.00,ncpus=56,physmem=264042652kb,availmem=264771276kb,totmem=276625560kb,idletime=2849088,nusers=0,nsessions=0,uname=Linux node010 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node009
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214450,macaddr=00:25:90:fd:79:56,cpuclock=Fixed,varattr=,jobs=,state=free,netload=808693149613435,gres=,loadave=0.04,ncpus=56,physmem=264042652kb,availmem=264170192kb,totmem=276625560kb,idletime=10188985,nusers=0,nsessions=0,uname=Linux node009 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node008
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214455,macaddr=0c:c4:7a:3a:ac:7a,cpuclock=Fixed,varattr=,jobs=,state=free,netload=807852757696274,gres=,loadave=0.00,ncpus=56,physmem=264042652kb,availmem=264108124kb,totmem=276625560kb,idletime=4822599,nusers=0,nsessions=0,uname=Linux node008 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node056
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214455,macaddr=0c:c4:7a:4e:eb:46,cpuclock=Fixed,varattr=,jobs=,state=free,netload=6121788790719586,gres=,loadave=0.16,ncpus=80,physmem=264032980kb,availmem=264420016kb,totmem=276615888kb,idletime=3261959,nusers=0,nsessions=0,uname=Linux node056 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node055
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214461,macaddr=0c:c4:7a:74:d1:fc,cpuclock=Fixed,varattr=,jobs=,state=free,netload=5337515128711898,gres=,loadave=0.01,ncpus=80,physmem=264032980kb,availmem=259915280kb,totmem=276615888kb,idletime=2254349,nusers=0,nsessions=0,uname=Linux node055 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node054
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214450,macaddr=0c:c4:7a:4e:c1:16,cpuclock=Fixed,varattr=,jobs=,state=free,netload=158204880370875,gres=,loadave=0.03,ncpus=80,physmem=264032980kb,availmem=264592268kb,totmem=276615888kb,idletime=3716925,nusers=0,nsessions=0,uname=Linux node054 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node053
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214446,macaddr=00:25:90:fc:e2:02,cpuclock=Fixed,varattr=,jobs=,state=free,netload=40123949209722,gres=,loadave=0.02,ncpus=80,physmem=264032964kb,availmem=264559356kb,totmem=276615872kb,idletime=3716470,nusers=0,nsessions=0,uname=Linux node053 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node052
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214470,macaddr=0c:c4:7a:4e:c0:c8,cpuclock=Fixed,varattr=,jobs=,state=free,netload=23406927130135,gres=,loadave=0.03,ncpus=80,physmem=264032968kb,availmem=264943584kb,totmem=276615876kb,idletime=1002862,nusers=0,nsessions=0,uname=Linux node052 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node051
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214437,macaddr=0c:c4:7a:4e:c0:b0,cpuclock=Fixed,varattr=,jobs=,state=free,netload=1079087142115482,gres=,loadave=0.03,ncpus=80,physmem=264032980kb,availmem=264664304kb,totmem=276615888kb,idletime=3715734,nusers=0,nsessions=0,uname=Linux node051 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node049
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214433,macaddr=0c:c4:7a:4e:c0:9c,cpuclock=Fixed,varattr=,jobs=,state=free,netload=5398354571197308,gres=,loadave=0.00,ncpus=80,physmem=264032964kb,availmem=264158132kb,totmem=276615872kb,idletime=2425777,nusers=0,nsessions=0,uname=Linux node049 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node050
+     state = job-exclusive
+     power_state = Running
+     np = 40
+     ntype = cluster
+     jobs = 0-39/340306.master.cm.cluster
+     status = rectime=1502214447,macaddr=0c:c4:7a:4e:c1:a6,cpuclock=Fixed,varattr=,jobs=340306.master.cm.cluster(cput=1388,energy_used=0,mem=5188188kb,vmem=21876424kb,walltime=46,session_id=56588),state=free,netload=6256038267130304,gres=,loadave=28.37,ncpus=80,physmem=264032980kb,availmem=259124144kb,totmem=276615888kb,idletime=2419375,nusers=1,nsessions=48,sessions=56588 56657 56658 56659 56660 56661 56662 56663 56664 56665 56666 56667 56668 56669 56670 56671 56672 56673 56674 56675 56676 56677 56678 56679 56680 56681 56682 56683 56684 56685 56686 56687 56688 56689 56690 56691 56692 56693 56694 56695 56696 56697 56698 56699 56700 56701 56702 56703,uname=Linux node050 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 40
+
+node047
+     state = job-exclusive
+     power_state = Running
+     np = 40
+     ntype = cluster
+     jobs = 0-39/340306.master.cm.cluster
+     status = rectime=1502214457,macaddr=0c:c4:7a:4e:ea:da,cpuclock=Fixed,varattr=,jobs=340306.master.cm.cluster,state=free,netload=53115716979731,gres=,loadave=28.62,ncpus=80,physmem=264032964kb,availmem=259346612kb,totmem=276615872kb,idletime=1830369,nusers=0,nsessions=0,uname=Linux node047 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 40
+
+node046
+     state = job-exclusive
+     power_state = Running
+     np = 40
+     ntype = cluster
+     jobs = 0-39/340306.master.cm.cluster
+     status = rectime=1502214442,macaddr=0c:c4:7a:4e:eb:a4,cpuclock=Fixed,varattr=,jobs=340306.master.cm.cluster,state=free,netload=1176949211828858,gres=,loadave=29.45,ncpus=80,physmem=264032964kb,availmem=259402544kb,totmem=276615872kb,idletime=3715586,nusers=0,nsessions=0,uname=Linux node046 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 40
+
+node048
+     state = job-exclusive
+     power_state = Running
+     np = 40
+     ntype = cluster
+     jobs = 0-39/340306.master.cm.cluster
+     status = rectime=1502214467,macaddr=0c:c4:7a:4e:eb:a8,cpuclock=Fixed,varattr=,jobs=340306.master.cm.cluster,state=free,netload=3804523062295967,gres=,loadave=32.84,ncpus=80,physmem=264032980kb,availmem=258506916kb,totmem=276615888kb,idletime=8910219,nusers=0,nsessions=0,uname=Linux node048 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 40
+
+node045
+     state = job-exclusive
+     power_state = Running
+     np = 40
+     ntype = cluster
+     jobs = 0-39/340306.master.cm.cluster
+     status = rectime=1502214467,macaddr=0c:c4:7a:4e:ea:dc,cpuclock=Fixed,varattr=,jobs=340306.master.cm.cluster,state=free,netload=4007874573232582,gres=,loadave=32.25,ncpus=80,physmem=264032980kb,availmem=258786020kb,totmem=276615888kb,idletime=8539507,nusers=0,nsessions=0,uname=Linux node045 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 40
+
+node044
+     state = job-exclusive
+     power_state = Running
+     np = 40
+     ntype = cluster
+     jobs = 0-39/340306.master.cm.cluster
+     status = rectime=1502214443,macaddr=0c:c4:7a:4e:e9:2e,cpuclock=Fixed,varattr=,jobs=340306.master.cm.cluster,state=free,netload=3874873942689809,gres=,loadave=28.81,ncpus=80,physmem=264032980kb,availmem=259106156kb,totmem=276615888kb,idletime=8214227,nusers=0,nsessions=0,uname=Linux node044 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 40
+
+node043
+     state = job-exclusive
+     power_state = Running
+     np = 40
+     ntype = cluster
+     jobs = 0-39/340306.master.cm.cluster
+     status = rectime=1502214448,macaddr=0c:c4:7a:4e:ea:90,cpuclock=Fixed,varattr=,jobs=340306.master.cm.cluster,state=free,netload=2990938019297298,gres=,loadave=28.84,ncpus=80,physmem=264032980kb,availmem=258809848kb,totmem=276615888kb,idletime=8803832,nusers=0,nsessions=0,uname=Linux node043 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 40
+
+node042
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214436,macaddr=0c:c4:7a:4e:ea:98,cpuclock=Fixed,varattr=,jobs=,state=free,netload=1525901810101646,gres=,loadave=0.01,ncpus=80,physmem=264032964kb,availmem=262444576kb,totmem=276615872kb,idletime=10291606,nusers=0,nsessions=0,uname=Linux node042 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node041
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214443,macaddr=0c:c4:7a:4e:e9:d0,cpuclock=Fixed,varattr=,jobs=,state=free,netload=1090844139470808,gres=,loadave=0.00,ncpus=80,physmem=264032964kb,availmem=264536172kb,totmem=276615872kb,idletime=333075,nusers=0,nsessions=0,uname=Linux node041 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node060
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214458,macaddr=0c:c4:7a:4e:bf:de,cpuclock=Fixed,varattr=,jobs=,state=free,netload=1054335642382165,gres=,loadave=0.00,ncpus=80,physmem=264032964kb,availmem=264041844kb,totmem=276615872kb,idletime=7155554,nusers=0,nsessions=0,uname=Linux node060 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node059
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214467,macaddr=0c:c4:7a:4e:ea:84,cpuclock=Fixed,varattr=,jobs=,state=free,netload=2201122768484072,gres=,loadave=0.00,ncpus=80,physmem=264032980kb,availmem=264109956kb,totmem=276615888kb,idletime=10291638,nusers=0,nsessions=0,uname=Linux node059 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node058
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214473,macaddr=0c:c4:7a:64:3f:3c,cpuclock=Fixed,varattr=,jobs=,state=free,netload=2298137461868636,gres=,loadave=0.00,ncpus=80,physmem=264032856kb,availmem=264394908kb,totmem=276615764kb,idletime=4937000,nusers=0,nsessions=0,uname=Linux node058 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node057
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214442,macaddr=0c:c4:7a:4e:ea:88,cpuclock=Fixed,varattr=,jobs=,state=free,netload=1297968455249287,gres=,loadave=0.00,ncpus=80,physmem=264032980kb,availmem=264203464kb,totmem=276615888kb,idletime=1917658,nusers=0,nsessions=0,uname=Linux node057 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node002
+     state = free
+     power_state = Running
+     np = 20
+     ntype = cluster
+     status = rectime=1502214458,macaddr=0c:c4:7a:1d:1e:56,cpuclock=Fixed,varattr=,jobs=,state=free,netload=88050237861699,gres=,loadave=0.00,ncpus=40,physmem=264047580kb,availmem=251929160kb,totmem=276630488kb,idletime=10190522,nusers=0,nsessions=0,uname=Linux node002 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     gpus = 2
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 20
+     total_threads = 40
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node001
+     state = free
+     power_state = Running
+     np = 20
+     ntype = cluster
+     status = rectime=1502214473,macaddr=0c:c4:7a:50:89:e2,cpuclock=Fixed,varattr=,jobs=,state=free,netload=63588173092883,gres=,loadave=0.00,ncpus=40,physmem=264047580kb,availmem=264913160kb,totmem=276630488kb,idletime=5760217,nusers=0,nsessions=0,uname=Linux node001 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     gpus = 2
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 20
+     total_threads = 40
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node004
+     state = free
+     power_state = Running
+     np = 20
+     ntype = cluster
+     status = rectime=1502214451,macaddr=0c:c4:7a:19:68:98,cpuclock=Fixed,varattr=,jobs=,state=free,netload=53695779417012,gres=,loadave=0.00,ncpus=40,physmem=264047580kb,availmem=264628056kb,totmem=276630488kb,idletime=10190096,nusers=0,nsessions=0,uname=Linux node004 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     gpus = 4
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 20
+     total_threads = 40
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node003
+     state = job-exclusive
+     power_state = Running
+     np = 20
+     ntype = cluster
+     jobs = 0-19/339306.master.cm.cluster
+     status = rectime=1502214461,macaddr=0c:c4:7a:19:68:50,cpuclock=Fixed,varattr=,jobs=339306.master.cm.cluster(cput=4226426,energy_used=0,mem=37465032kb,vmem=43631104kb,walltime=704875,session_id=16828),state=free,netload=82520606661680,gres=,loadave=6.02,ncpus=40,physmem=264047580kb,availmem=231111408kb,totmem=276630488kb,idletime=514701,nusers=1,nsessions=8,sessions=16828 16878 16879 16880 16881 16882 16883 16884,uname=Linux node003 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     gpus = 4
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 20
+     total_threads = 40
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 20
+
+node203
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214467,macaddr=78:2b:cb:70:9e:e1,cpuclock=Fixed,varattr=,jobs=,state=free,netload=15632954244253,gres=,loadave=2.00,ncpus=80,physmem=528376276kb,availmem=527669864kb,totmem=540959184kb,idletime=659803,nusers=0,nsessions=0,uname=Linux node203 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 4
+     total_numa_nodes = 4
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node202
+     state = job-exclusive
+     power_state = Running
+     np = 40
+     ntype = cluster
+     jobs = 0-39/248242.master.cm.cluster
+     status = rectime=1502214438,macaddr=78:2b:cb:67:0a:09,cpuclock=Fixed,varattr=,jobs=248242.master.cm.cluster(cput=97086808,energy_used=0,mem=207585312kb,vmem=321640472kb,walltime=2954366,session_id=20185),state=free,netload=161056412219072,gres=,loadave=82.15,ncpus=80,physmem=264135264kb,availmem=238090600kb,totmem=276718172kb,idletime=3619317,nusers=1,nsessions=1,sessions=20185,uname=Linux node202 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 4
+     total_numa_nodes = 4
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 40
+
+node201
+     state = free
+     power_state = Running
+     np = 40
+     ntype = cluster
+     status = rectime=1502214438,macaddr=78:2b:cb:65:e4:c0,cpuclock=Fixed,varattr=,jobs=,state=free,netload=57215504061557,gres=,loadave=2.00,ncpus=80,physmem=264135264kb,availmem=264959368kb,totmem=276718172kb,idletime=1731222,nusers=0,nsessions=0,uname=Linux node201 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 4
+     total_numa_nodes = 4
+     total_cores = 40
+     total_threads = 80
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node007
+     state = offline
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214451,macaddr=00:25:90:fd:d2:d8,cpuclock=Fixed,varattr=,jobs=,state=free,netload=313582062942842,gres=,loadave=1.16,ncpus=56,physmem=264042648kb,availmem=263876840kb,totmem=276625556kb,idletime=7501635,nusers=0,nsessions=0,uname=Linux node007 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node006
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214433,macaddr=00:25:90:fd:d3:f2,cpuclock=Fixed,varattr=,jobs=,state=free,netload=11435178155886,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=264336756kb,totmem=276625556kb,idletime=346865,nusers=0,nsessions=0,uname=Linux node006 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node005
+     state = free
+     power_state = Running
+     np = 28
+     ntype = cluster
+     status = rectime=1502214443,macaddr=00:25:90:fd:d4:48,cpuclock=Fixed,varattr=,jobs=,state=free,netload=25866000413291,gres=,loadave=0.00,ncpus=56,physmem=264042648kb,availmem=265062632kb,totmem=276625556kb,idletime=1757075,nusers=0,nsessions=0,uname=Linux node005 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 28
+     total_threads = 56
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+
+node061
+     state = job-exclusive
+     power_state = Running
+     np = 16
+     ntype = cluster
+     jobs = 0-15/340085.master.cm.cluster
+     status = rectime=1502214474,macaddr=0c:c4:7a:e5:2a:48,cpuclock=Fixed,varattr=,jobs=340085.master.cm.cluster(cput=2998882,energy_used=0,mem=62470980kb,vmem=73064680kb,walltime=306179,session_id=4980),state=free,netload=29942033418693,gres=,loadave=14.20,ncpus=32,physmem=528270404kb,availmem=439954724kb,totmem=540853312kb,idletime=561402,nusers=1,nsessions=12,sessions=4980 5033 5034 5035 5036 5037 5038 5039 5040 5041 5042 5044,uname=Linux node061 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     gpus = 4
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 16
+     total_threads = 32
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 16
+
+node062
+     state = free
+     power_state = Running
+     np = 16
+     ntype = cluster
+     status = rectime=1502214432,macaddr=0c:c4:7a:e5:27:42,cpuclock=Fixed,varattr=,jobs=,state=free,netload=23859795690852,gres=,loadave=4.56,ncpus=32,physmem=528270404kb,availmem=368920472kb,totmem=540853312kb,idletime=1470424,nusers=0,nsessions=0,uname=Linux node062 3.10.0-514.10.2.el7.x86_64 #1 SMP Fri Mar 3 00:04:05 UTC 2017 x86_64,opsys=linux
+     mom_service_port = 15002
+     mom_manager_port = 15003
+     gpus = 4
+     total_sockets = 2
+     total_numa_nodes = 2
+     total_cores = 16
+     total_threads = 32
+     dedicated_sockets = 0
+     dedicated_numa_nodes = 0
+     dedicated_cores = 0
+     dedicated_threads = 0
+

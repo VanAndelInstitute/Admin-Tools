@@ -1,0 +1,78 @@
+#!/usr/bin/perl
+use Time::HiRes qw(gettimeofday);
+use strict;
+
+#SETTINGS
+my $RSYNC = "/primary/vari/software/rsync/3.1.2/bin/rsync";
+my $THREADS = 10;
+my $TIME = int (gettimeofday * 1000);
+my $WORKDIR = "/primary/vari/admin/tools/kriossync/logs/$TIME";
+system("mkdir $WORKDIR");
+my $listFile = "$WORKDIR/$TIME";
+my $listFileParts = $TIME . "PART";
+my $SRC = "/remote/krios/";
+my $DEST = "/primary/instruments/cryoem/titan";
+#my $DEST = "/primary/vari/admin/rsynctest";
+#################
+
+
+#make sure this is not already running, die if we are.
+my $numprocs = `pgrep kriossync.pl | wc -l`;
+chomp $numprocs;
+system "echo already running > $WORKDIR/failed.log" if $numprocs != 1;
+die "already running\n" if $numprocs != 1;
+
+
+#make sure src and dest exist and are mounted
+die unless length(`ls $SRC`) > 5;
+die unless -e $SRC;
+die unless -e $DEST;
+die unless -e $WORKDIR;
+chdir $WORKDIR;
+
+
+#get the list of files to transfer
+runcmd("$RSYNC --dry-run --safe-links -avxl $SRC $DEST | grep -v \"/\$\" | sort --random-sort  > $listFile");
+
+#split the list into parts
+my $lineCount = `wc -l < $listFile`;
+system("echo nothing new to transfer > $WORKDIR/failed.log") if $lineCount <= 4;
+die if $lineCount <= 4;
+my $partSize = int ($lineCount / $THREADS ) + 1;
+runcmd("split -l $partSize $listFile $listFileParts");
+
+#for each part, start an rsync process in a new thread
+my @parts = glob("$listFileParts*");
+
+for my $p (@parts)
+{
+	my $pid = fork;
+	if (not $pid) 
+	{
+		#transfer the files
+		runcmd("$RSYNC -avxl --chown=cryoem:cryoem_users --files-from $WORKDIR/$p $SRC $DEST &> $WORKDIR/$p\.log");
+		#then exit the child thread
+		exit;
+	}
+}
+
+#parent thread wait for all child threads
+wait() for @parts;
+
+#fix ownership
+#runcmd("cd $DEST");
+#my $chmodCmd = "chown -R cryoem:cryoem_users $DEST"; 
+#runcmd($chmodCmd);
+
+#delete files older than 5 hours
+
+runcmd("find /remote/krios -mmin +240 -type f -exec rm  {} \\;");
+
+#cleanup
+sub runcmd{
+        my $cmd=shift @_;
+        my $caller=(caller(1))[3];
+        print STDERR "$caller\t$cmd\n";
+        system($cmd);
+}
+

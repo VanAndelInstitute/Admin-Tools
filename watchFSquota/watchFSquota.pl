@@ -1,5 +1,17 @@
 #!/usr/bin/perl
 use Net::SMTP;
+
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+# watch for people hitting their soft-quotas and then email accordingly
+#
+##############################################################
+
+
+
 my @filesets =`for i in \`/usr/lpp/mmfs/bin/mmlsfileset  home | cut -f 1 -d ' ' | tail -n +3 | sort | xargs \`; do echo \$i \`/usr/lpp/mmfs/bin/mmlsquota -j \$i home --block-size auto  | tail -n 1 | sed 's/|.\+//g' \` ; done ; for i in \`/usr/lpp/mmfs/bin/mmlsfileset  scratch | cut -f 1 -d ' ' | tail -n +3 | sort | xargs \`; do echo \$i \`/usr/lpp/mmfs/bin/mmlsquota -j \$i scratch --block-size auto  | tail -n 1 | sed 's/|.\+//g' \` ; done`;
 
 my @msgFS;

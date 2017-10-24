@@ -2,6 +2,18 @@
 use Time::HiRes qw(gettimeofday);
 use strict;
 
+
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+# archive the older data from the main storage to another location
+# basically sync all older data from A to B, and then delete it from A.
+#
+##############################################################
+
+
 #SETTINGS
 my $RSYNC = "/primary/vari/software/rsync/3.1.2/bin/rsync";
 my $THREADS = 10;

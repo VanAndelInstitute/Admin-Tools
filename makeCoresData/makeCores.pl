@@ -1,5 +1,17 @@
 #!/usr/bin/perl
 use File::stat;
+
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+#  for each group's fileset, create a cores writable folder for depositing data
+#  also make sure to prevent core users from seeing other data not belonging to them
+#
+##############################################################
+
+
 $COREDIR = "vari-core-generated-data";
 for my $d (glob("/primary/projects/*"))
 {

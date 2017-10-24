@@ -2,6 +2,18 @@
 use Time::HiRes qw(gettimeofday);
 use strict;
 
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+# do a parallel sync the krios cryoem data from the instrument storage to the permanant storage
+#  this assumes we have both mounted. we also change ownership to the core
+#
+##############################################################
+
+
+
 #SETTINGS
 my $RSYNC = "/primary/vari/software/rsync/3.1.2/bin/rsync";
 my $THREADS = 10;

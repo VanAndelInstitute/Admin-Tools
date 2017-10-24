@@ -1,6 +1,17 @@
 #!/usr/bin/perl
 use IO::Handle;
 
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+# dirty hack to restart PBS when a bug was encountered
+#
+##############################################################
+
+
+
 my $throttle = 0;
 my $newestLog = "empty";;
 

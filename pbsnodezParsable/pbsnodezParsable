@@ -2,6 +2,16 @@
 use Time::Local;
 use Term::ANSIColor;
 use Data::Dumper;
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+# dump the PBS node node status, running jobs, load etc in a parsable way
+#
+##############################################################
+
+
 
 die "already running" if `pgrep pbsnodezParsable`;
 

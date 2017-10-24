@@ -1,6 +1,16 @@
 #!/usr/bin/perl
 use strict;
 
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+#  Create filesets for a new investigator on primary and secondary
+#  
+#
+##############################################################
+
 my $CR = "/usr/lpp/mmfs/bin/mmcrfileset";
 my $LINK = "/usr/lpp/mmfs/bin/mmlinkfileset";
 my $LS = "/usr/lpp/mmfs/bin/mmlsfileset";

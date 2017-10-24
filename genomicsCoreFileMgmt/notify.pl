@@ -1,6 +1,15 @@
 #!/usr/bin/perl
 use Net::SMTP;
 
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+#  notify genomics staff is trash is full
+#
+##############################################################
+
 @dirs = ( "/primary/instruments/sequencing/illumina/incoming/.trash", "/primary/instruments/iscan/.trash", "/primary/projects/genomicscore/.trash");
 
 

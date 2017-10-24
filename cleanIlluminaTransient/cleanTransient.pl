@@ -1,6 +1,18 @@
 #!/usr/bin/perl
 #
 #
+
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+#  
+#
+##############################################################
+
+
+
 $base = "/primary/instruments/sequencing/illumina/incoming";
 
 

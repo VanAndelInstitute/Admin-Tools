@@ -2,6 +2,19 @@
 use POSIX qw(strftime);
 use strict;
 
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+#  Perform the regular snapshots and get rid of old ones. we keep a number of
+# trailing weeks and days and then trash the ones beyond that.
+# this is run from cron
+#
+##############################################################
+
+
+
 my $date = strftime "%Y-%m-%d-%H-%M-%a", localtime;
 my $today =  strftime "%a", localtime;
 my $gpfsBin = "/usr/lpp/mmfs/bin";

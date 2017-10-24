@@ -1,6 +1,15 @@
 #!/usr/bin/perl
 use Net::SMTP;
 
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+#  watch gpfs status and email when things change.
+#
+##############################################################
+
 
 ################################
 #check for changes in mmgetstate vs the last time we ran this script, alert if changes.

@@ -4,6 +4,17 @@ use Term::ANSIColor;
 use Data::Dumper;
 use Net::SMTP;
 
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+#  watch for users with low load average in PBS and email them a warning
+#
+##############################################################
+
+
+
 
 $output = `/cm/shared/apps/torque/current/bin/pbsnodes`;
 $zstatout = `/primary/shared/production/software/zacks_usc_devel/zacks_PBS_Tools/zstat.pl all`;

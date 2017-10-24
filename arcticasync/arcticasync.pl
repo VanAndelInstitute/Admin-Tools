@@ -1,4 +1,16 @@
 #!/usr/bin/perl
+
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+#  do a parallel sync the artica cryoem data from the instrument storage to the permanant storage
+#  this assumes we have both mounted. we also change ownership to the core
+#
+##############################################################
+
+
 use Time::HiRes qw(gettimeofday);
 use File::Basename;
 use strict;

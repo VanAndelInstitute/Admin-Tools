@@ -1,5 +1,17 @@
 #!/usr/bin/perl
 
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+#  Adds the primary and secondary lab fileset symplinks to a users home dir
+#
+##############################################################
+
+
+
+
 $user = shift @ARGV || die "usage: addFileSetSymlinks.pl username fileset-name\nex: addFileSetSymlinks.pl zack.ramjan laird\n";
 $fileset = shift @ARGV || die "usage: addFileSetSymlinks.pl username fileset-name\nex: addFileSetSymlinks.pl zack.ramjan laird\n";
 

@@ -1,4 +1,15 @@
 #!/usr/bin/perl
+##############################################################
+#  
+#  Author     : zack ramjan
+#  Company    : Van Andel Institute
+#  Description: 
+# 
+#  print out the quota usage for each group's filesets
+#
+##############################################################
+
+
 
 $outfile = "/primary/vari/admin/tools/quotaGraph/quotatable.txt";
 $gpfs = "/usr/lpp/mmfs/bin";

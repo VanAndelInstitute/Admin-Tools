@@ -20,11 +20,11 @@ check_group(){
   # hpcadmins can restart any node
   if id -nG "$SUDO_USER" | grep -qw "hpcadmins"; then OK=0;
   
-  # li users can restart any node between 61 and 63 inclusive
+  # li users can restart any node in the set [61, 63]
   elif id -nG "$SUDO_USER" | grep -qw "hli.lab-modify"; then
     if [ "$NODE" -ge 61 -a "$NODE" -le 63 ]; then OK=0; fi
 
-  # bio users can restart any node between 65 and 68 inclusive and 201 and 203 inclusive
+  # bio users can restart any node in the set [65,68]U[201,203]
   elif id -nG "$SUDO_USER" | grep -qw "bioinformatics-modify"; then 
     if [ "$NODE" -ge 65 -a "$NODE" -le 68 ]; then OK=0;
     elif [ "$NODE" -ge 201 -a "$NODE" -le 203 ]; then OK=0; fi

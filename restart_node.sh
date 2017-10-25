@@ -1,5 +1,16 @@
 #!/bin/bash
 
+##############################################################
+#  
+#  Author     : Matthew Hoffman
+#  Company    : Van Andel Institute
+#  Description: 
+#  Allow certain users the priveleges to restart nodes that
+#  are owned by their group. Nodes are reset using Bright's
+#  cmsh 
+#
+##############################################################
+
 # Verify the user is part of a group with the right privileges
 check_group(){
   

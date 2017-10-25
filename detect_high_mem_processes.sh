@@ -1,5 +1,15 @@
 #/bin/bash
 
+##############################################################
+#  
+#  Author     : Matthew Hoffman
+#  Company    : Van Andel Institute
+#  Description: 
+#  Detect and log high memory proccesses on the head node
+#
+##############################################################
+
+
 # pull the total amount of system memory from meminfo
 TOTAL_MEM=`/usr/bin/awk '/MemTotal/ {a=$2} END{printf("%d", a)}' /proc/meminfo`
 

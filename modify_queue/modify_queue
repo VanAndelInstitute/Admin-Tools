@@ -1,0 +1,138 @@
+#!/bin/bash
+
+##############################################################
+#  
+#  Author     : Matthew Hoffman
+#  Company    : Van Andel Institute
+#  Description: 
+#  Utility that allows queue owners to modify their owned
+#  queue by adding or removing users. 
+#
+##############################################################
+
+add_to_queue(){
+  echo Adding $user to the $queue queue
+	
+  `/cm/shared/apps/torque/6.0.2/bin/qmgr -c "set queue $queue acl_users+=$user"`
+}
+
+check_group(){
+
+  OK=1
+
+  if id -nG "$SUDO_USER" | grep -qw "hpcadmins"; then OK=0;
+  
+  elif id -nG "$SUDO_USER" | grep -qw "triche.lab-modify"; then
+    if [ "$queue" == "triche" ]; then OK=0;
+    else echo $SUDO_USER cannot modify the $queue queue... Exiting; fi
+  
+  else
+    echo $SUDO_USER cannot modify the $queue queue... Exiting;
+  fi
+}
+
+remove_from_queue(){
+  echo Removing $user from the $queue queue
+  `/cm/shared/apps/torque/6.0.2/bin/qmgr -c "set queue $queue acl_users-=$user"`
+}
+
+run(){
+  validate
+  check_group
+  if [ "$OK" -eq 0 ]; then
+    if [ "$force" -eq 0 ]; then
+      verify_input
+    fi
+    
+    if [[ "$option" == "remove" ]]; then
+      remove_from_queue
+    else
+      add_to_queue
+    fi
+  fi
+}
+
+show_help(){
+  printf "\nUsage: modify_queue -u USER -q QUEUE [OPTION]...\n"
+  printf "Add or remove users from a queue on the Van Andel Institute HPC cluster.\n"
+  printf "Requires ownership of queue and sudo access. Contact the HPC Admin for access\n\n"
+  printf "  -f\t\tignore all prompts and force the change to the queue\n"
+  printf "  -h\t\tshow this help message\n"
+  printf "  -o\t\tthe action to be taken: add, remove\n\t\t  defaults to add when not specified\n"
+  printf "  -q\t\tthe queue to be modified. mandatory parameter\n"
+  printf "  -u\t\tthe user to be modified. mandatory parameter\n"
+}
+
+validate(){
+
+  if [[ "$user" == "" ]]; then
+    echo Please specify a user... Exiting
+    exit 0
+  fi
+  
+  if [[ "$queue" == "" ]]; then
+    echo Please specify a queue... Exiting
+    exit 0
+  fi
+
+  user_does_not_exist=$(id -u $user > /dev/null 2>&1; echo $?)
+  
+  if [[ $user_does_not_exist == 1 ]]; then
+    echo No user $user found. Please use the form user.name
+    exit 0
+  fi
+}
+
+verify_input(){
+  printf "$option $user to the $queue queue? (y|n) :"
+  read input
+  if [[ "$input" != "y" ]]; then
+    exit 0
+  fi
+}
+
+###############################################################################
+
+# Create Variables
+
+OPTIND=1        #POSIX VARIBLE for getopts
+
+force=0
+option="add"
+user=""
+queue=""
+
+# Process input
+
+while getopts "hf?o:u:q:" opt; do
+  case "$opt" in
+    h|\?)
+      show_help
+      exit 0
+      ;;
+    u)
+      user=$(echo $OPTARG | tr '[A-Z]' '[a-z]')
+      ;;
+    q)
+      queue=$(echo $OPTARG | tr '[A-Z]' '[a-z]')
+      ;;
+    f)
+      force=1
+      ;;
+    o) option=$(echo $OPTARG | tr '[A-Z]' '[a-z]')
+      ;;
+    *)
+      echo >&2 "Invalid argument(s): $1"
+      echo See modify_queue -h for usage
+      exit 0
+      ;;
+  esac
+done
+
+shift $((OPTIND-1))
+[ "$1" = "--" ] && shift
+ 
+# Run the program
+
+run
+exit 0

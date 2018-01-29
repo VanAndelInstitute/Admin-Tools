@@ -13,14 +13,16 @@ use File::stat;
 
 
 $COREDIR = "vari-core-generated-data";
-for my $d (glob("/primary/projects/*"))
+$PROJECTSDIR = "/primary/projects";
+$PI = $ARGV[0] || die "must supply lab name";
+-e "/primary/projects/$PI" || die  "must supply valid lab name";
+length($PI) > 1 || die  "must supply valid lab name";
+
+makeDir("$PROJECTSDIR/$PI");
+
+sub makeDir 
 {
-	next unless $d =~ /\/chandler/;
-	next if $d =~ /core/;
-	next if $d =~ /bbc/;
-	next if $d =~ /synology/;
-	next if $d =~ /VADR/;
-	next if $d =~ /vivarium/;
+	my $d = shift @_;
 	next unless -d $d;
 	print STDERR "processing $d\n";
 	my $group = getgrgid(stat($d)->gid);
@@ -39,9 +41,10 @@ for my $d (glob("/primary/projects/*"))
 		next unless getgrgid(stat($f)->gid) =~ /domain users/;
 		next if $f =~ /^\./;
 		next if $f =~ /$COREDIR/;
-		runcmd("setfacl -m g::000  $f");	
-		runcmd("setfacl -m g:\'domain users\':000  $f");	
-		runcmd("setfacl -m g:" . $group . ":rwx $f");
+		next if $f =~ /[^[:ascii:]]/;
+		runcmd("setfacl -m g::000  \"$f\"");	
+		runcmd("setfacl -m g:\'domain users\':000  \"$f\"");	
+		runcmd("setfacl -m g:" . $group . ":rwx \"$f\"");
 	}
 	print STDERR "\n";
 }
@@ -50,5 +53,5 @@ sub runcmd{
         my $cmd=shift @_;
         my $caller=(caller(1))[3];
         print STDERR "$caller\t$cmd\n";
-        #system($cmd);
+        system($cmd);
 }

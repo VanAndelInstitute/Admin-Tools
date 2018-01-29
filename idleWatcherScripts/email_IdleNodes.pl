@@ -17,7 +17,7 @@ use Net::SMTP;
 
 
 $output = `/cm/shared/apps/torque/current/bin/pbsnodes`;
-$zstatout = `/primary/shared/production/software/zacks_usc_devel/zacks_PBS_Tools/zstat.pl all`;
+$zstatout = `/primary/vari/software/pbsPretty/zstat`;
 foreach my $line (split '\n', $zstatout)
 {
 	chomp $line;

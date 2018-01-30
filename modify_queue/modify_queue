@@ -12,14 +12,12 @@
 
 add_to_queue(){
   echo Adding $user to the $queue queue
-	
   `/cm/shared/apps/torque/6.0.2/bin/qmgr -c "set queue $queue acl_users+=$user"`
 }
 
 check_group(){
 
   OK=1
-
   if id -nG "$SUDO_USER" | grep -qw "hpcadmins"; then OK=0;
   
   elif id -nG "$SUDO_USER" | grep -qw "triche.lab-modify"; then
@@ -95,15 +93,14 @@ verify_input(){
 
 # Create Variables
 
-OPTIND=1        #POSIX VARIBLE for getopts
+OPTIND=1        	# POSIX VARIBLE for getopts
 
-force=0
-option="add"
-user=""
-queue=""
+force=0			# Ignore prompts?
+option="add"		# Add or Remove the user
+user=""			# The user to be modified
+queue=""		# The queue to be modified
 
 # Process input
-
 while getopts "hf?o:u:q:" opt; do
   case "$opt" in
     h|\?)
@@ -133,6 +130,5 @@ shift $((OPTIND-1))
 [ "$1" = "--" ] && shift
  
 # Run the program
-
 run
 exit 0

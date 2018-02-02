@@ -20,13 +20,29 @@ check_group(){
   OK=1
   if id -nG "$SUDO_USER" | grep -qw "hpcadmins"; then OK=0;
   
-  elif id -nG "$SUDO_USER" | grep -qw "triche.lab-modify"; then
-    if [ "$queue" == "triche" ]; then OK=0;
+  elif [[ "$queue" == "triche" ]]; then
+    
+    if [[ "$user" == "tim.triche" ]]; then
+      echo "The owner of a queue cannot be removed from their owned queue."
+      exit 0
+    fi
+    
+    if [[ "$SUDO_USER" == "tim.triche" ]]; then OK=0;
     else echo $SUDO_USER cannot modify the $queue queue... Exiting; fi
   
   else
     echo $SUDO_USER cannot modify the $queue queue... Exiting;
   fi
+}
+
+list_users_in_queue(){
+  if [[ "$queue" == "" ]]; then
+    echo "Please provide a queue."
+    exit 0
+  fi
+  
+  printf "The following users can submit jobs to the $queue queue:"
+  /cm/shared/apps/torque/6.0.2/bin/qstat -Qf | grep $queue | grep acl_users | sed 's/.*=//'
 }
 
 remove_from_queue(){
@@ -51,17 +67,23 @@ run(){
 }
 
 show_help(){
-  printf "\nUsage: modify_queue -u USER -q QUEUE [OPTION]...\n"
+  printf "\nUsage: sudo modify_queue -u USER -q QUEUE [OPTION]...\n"
   printf "Add or remove users from a queue on the Van Andel Institute HPC cluster.\n"
   printf "Requires ownership of queue and sudo access. Contact the HPC Admin for access\n\n"
   printf "  -f\t\tignore all prompts and force the change to the queue\n"
   printf "  -h\t\tshow this help message\n"
+  printf "  -l\t\tlist the users allowed to submit jobs to the queue supplied. Does not require a user to be supplied.\n"
   printf "  -o\t\tthe action to be taken: add, remove\n\t\t  defaults to add when not specified\n"
   printf "  -q\t\tthe queue to be modified. mandatory parameter\n"
   printf "  -u\t\tthe user to be modified. mandatory parameter\n"
 }
 
 validate(){
+
+  if [[ "$SUDO_USER" == "" ]]; then
+    echo "modify_queue requires sudo access... Exiting"
+    exit 0
+  fi
 
   if [[ "$user" == "" ]]; then
     echo Please specify a user... Exiting
@@ -82,7 +104,11 @@ validate(){
 }
 
 verify_input(){
-  printf "$option $user to the $queue queue? (y|n) :"
+  if [[ "$option" == "add" ]]; then
+    printf "$option $user to the $queue queue? (y|n) :"
+  else
+    printf "$option $user from the $queue queue? (y|n) :"
+  fi
   read input
   if [[ "$input" != "y" ]]; then
     exit 0
@@ -99,9 +125,10 @@ force=0			# Ignore prompts?
 option="add"		# Add or Remove the user
 user=""			# The user to be modified
 queue=""		# The queue to be modified
+list=0			# List users?
 
 # Process input
-while getopts "hf?o:u:q:" opt; do
+while getopts "hfl?o:u:q:" opt; do
   case "$opt" in
     h|\?)
       show_help
@@ -113,6 +140,10 @@ while getopts "hf?o:u:q:" opt; do
     q)
       queue=$(echo $OPTARG | tr '[A-Z]' '[a-z]')
       ;;
+    l)
+     list_users_in_queue
+     exit 0
+     ;;
     f)
       force=1
       ;;

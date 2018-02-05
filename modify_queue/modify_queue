@@ -41,8 +41,15 @@ list_users_in_queue(){
     exit 0
   fi
   
-  printf "The following users can submit jobs to the $queue queue:"
-  /cm/shared/apps/torque/6.0.2/bin/qstat -Qf | grep $queue | grep acl_users | sed 's/.*=//'
+  users=$(/cm/shared/apps/torque/6.0.2/bin/qstat -Qf | grep $queue | grep acl_users | sed 's/.*=//')
+  
+  if [[ "$users" == "" ]]; then
+    echo "No users are defined. This queue is available to all HPC users."
+    echo "If you are the owner of this queue and would like to limit the users who can submit jobs please contact the HPC admins."
+  else
+    printf "The following users can submit jobs to the $queue queue:$users\n"
+  fi
+
 }
 
 remove_from_queue(){
@@ -121,11 +128,10 @@ verify_input(){
 
 OPTIND=1        	# POSIX VARIBLE for getopts
 
-force=0			# Ignore prompts?
+force=0			# Ignore prompts when 1
 option="add"		# Add or Remove the user
 user=""			# The user to be modified
 queue=""		# The queue to be modified
-list=0			# List users?
 
 # Process input
 while getopts "hfl?o:u:q:" opt; do

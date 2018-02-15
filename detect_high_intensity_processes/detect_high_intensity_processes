@@ -1,0 +1,155 @@
+#/bin/bash
+
+################################################################################################################################
+#  
+#  Author     : Matthew Hoffman
+#  Company    : Van Andel Institute
+#  Description: 
+#  Automatically detect, log and end high memory/CPU processes on the head node
+#   ex: ./detect_high_intensity_processes -m 6, sets the percentage to 1/6 total mem (default is 4 or 25%)
+#   ex: ./detect_high_intensity_processes -c 15, sets the percentage to 15% of the CPU (default is 20%)
+#   ex: ./detect_high_intensity_processes -t 5, sets the time allowed to 5 minutes (default is 5)
+#   the -e option is required to automatically end processes (not set by default)                                                                     
+#   the -a option is required to alert users (not set by default)
+#
+################################################################################################################################
+
+########################################
+# Check for high intensity processes
+# 
+# @param: string, the type of resource
+#           ex: "pcpu", "size"
+########################################
+function process_ps(){
+  while read -r line; do
+
+    # separate each line by whitespace and assign variables
+    arr=($line)
+    user=${arr[0]}
+    uid=${arr[1]}
+    pid=${arr[2]}
+    fname=${arr[3]}
+    check=${arr[4]}
+
+    host=`hostname`
+    line="$user $fname $pid"
+
+    if [[ "$1" == "size" ]]; then
+      max="$MAX_ALLOWED_MEM"
+      type="memory"
+    else
+      check=$(printf "%.0f" "$check")
+      type="of the cpu"
+      max="$PERCENTAGE_CPU"
+    fi
+
+    [ -z "$max" ] && max=999999999
+
+    # if the the process is using more of the resource than allowed and user is not a
+    # system user, alert the user and send to system log 
+    if [[ "$check" -ge "$max" ]] && [[ "$uid" -gt 500 ]]; then
+      if [[ "$ALERT_USER" -eq 1 ]]; then
+        msg="Hello $user,\n\n"
+        msg1="Your process $fname ($pid) was automatically detected using more $type than allowed for a user process on $host.hpc.vai.org. "
+        msg2="$host.hpc.vai.org is a shared resource intended solely for job submission, "
+        msg3="all high intensity processes should be run on a compute node. "
+	    msg4="Your process will be terminated soon. To prevent any loss of data from sudden termination "
+	    msg5="please end $fname ($pid) to help ensure that shared HPC resources are used fairly.\n\n"
+	    msg6="HPC team\nhpc3@vai.org"
+        grep -qF -- "$line" "$file" || `printf "$msg$msg1$msg2$msg3$msg4$msg5$msg6" | mail -v -s "$fname ($pid)" $user@vai.org`
+      fi
+      d=`date +%Y%m%d%H%M`
+      grep -qF -- "$line" "$file" || echo "$line $d" >> "$file"
+      grep -qF -- "$line" "$file" || /usr/bin/logger "Process $fname ($pid) owned by $user is using more $type than  allowed on $host."
+    fi
+  done <<< "$(/usr/bin/ps -eo user:35,uid,pid,fname,$1 --sort $1 | /usr/bin/tail)"
+}
+
+function end(){
+  while read name
+  do
+    arr=($name)
+    user=${arr[0]}
+    fname=${arr[1]}
+    pid=${arr[2]}
+    t=${arr[3]}
+
+    date=`date +%Y%m%d%H%M`
+
+    date=${date#0}
+    t=${t#0}
+
+    dif=$(($date-$t))
+
+    if [[ "$dif" -ge "$ALLOWED_TIME" ]]; then
+      
+      sed -i "/$pid/d" $file 
+      
+      if [[ "$END" -eq 1 ]]; then
+        /usr/bin/logger "Automatically ended high intensity process: $fname ($pid) owned by $user"
+        `killall $fname -u $user`
+      fi
+    fi
+
+  done < $file
+}
+
+# POSIX Variable require for getopts
+OPTIND=1                                                                        
+
+# read in command line arguments
+while getopts "ae?c:t:m:" opt; do                                                
+  case "$opt" in                                                                
+    e)
+      END=1    
+      ;;
+    a)
+      ALERT_USER=1
+      ;;
+    c)                                                                          
+      PERCENTAGE_CPU=$OPTARG                                                        
+      ;;
+    m)
+      PERCENTAGE_MEM=$OPTARG
+      ;;                                                                       
+    t)                                                                          
+      ALLOWED_TIME=$OPTARG                                                        
+      ;;                                                                        
+    *)                                                                          
+      echo >&2 "Invalid argument(s): $1"                                        
+      exit 0                                                                    
+      ;;                                                                        
+  esac                                                                          
+done                                                                            
+                                                                                
+shift $((OPTIND-1))                                                             
+[ "$1" = "--" ] && shift  
+
+file=".ps.txt"
+
+# pull the total amount of system memory from meminfo
+TOTAL_MEM=`/usr/bin/awk '/MemTotal/ {a=$2} END{printf("%d", a)}' /proc/meminfo`
+
+# default to 25% of TOTAL_MEM, if not set on the command line
+[ -z "$PERCENTAGE_MEM" ] && PERCENTAGE_MEM=4
+
+[ -z "$PERCENTAGE_CPU" ] && PERCENTAGE_CPU=20
+
+# default to 5 minutes if not set on the command line
+[ -z "$ALLOWED_TIME" ] && ALLOWED_TIME=5
+[ -z "$END" ] && END=0
+[ -z "$ALERT_USER" ] && ALERT_USER=0
+
+# set the maximum allowed memory for a user process
+MAX_ALLOWED_MEM=$((TOTAL_MEM / PERCENTAGE_MEM))
+
+########
+# Run
+########
+
+/usr/bin/logger "Running detect_high_intensity_processes with ALERT_USER:$ALERT_USER END_PROCESS:$END MAX_MEM:$MAX_ALLOWED_MEM MAX_CPU:$PERCENTAGE_CPU TIME:$ALLOWED_TIME min"
+
+process_ps "size"
+process_ps "pcpu"
+
+end

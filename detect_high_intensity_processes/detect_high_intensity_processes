@@ -49,7 +49,7 @@ function process_ps(){
     # system user, alert the user and send to system log 
     if [[ "$check" -ge "$max" ]] && [[ "$uid" -gt 500 ]]; then
       if [[ "$ALERT_USER" -eq 1 ]]; then
-        first_name=$(echo $user | cut -d "." -f 1 | awk '{print toupper(substr($0,0,1))tolower(substr($0,2))}')
+        first_name=$(echo ${user^} | cut -d "." -f 1)
         
         msg="Hello $first_name,\n\n"
         msg1="Your process $fname ($pid) was automatically detected using more $type than allowed for a user process on $host.hpc.vai.org. "

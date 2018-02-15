@@ -49,14 +49,18 @@ function process_ps(){
     # system user, alert the user and send to system log 
     if [[ "$check" -ge "$max" ]] && [[ "$uid" -gt 500 ]]; then
       if [[ "$ALERT_USER" -eq 1 ]]; then
-        msg="Hello $user,\n\n"
+        first_name=$(echo $user | cut -d "." -f 1 | awk '{print toupper(substr($0,0,1))tolower(substr($0,2))}')
+        
+        msg="Hello $first_name,\n\n"
         msg1="Your process $fname ($pid) was automatically detected using more $type than allowed for a user process on $host.hpc.vai.org. "
         msg2="$host.hpc.vai.org is a shared resource intended solely for job submission, "
         msg3="all high intensity processes should be run on a compute node. "
-	    msg4="Your process will be terminated soon. To prevent any loss of data from sudden termination "
-	    msg5="please end $fname ($pid) to help ensure that shared HPC resources are used fairly.\n\n"
-	    msg6="HPC team\nhpc3@vai.org"
-        grep -qF -- "$line" "$file" || `printf "$msg$msg1$msg2$msg3$msg4$msg5$msg6" | mail -v -s "$fname ($pid)" $user@vai.org`
+        msg4="Your process will be terminated soon. To prevent any loss of data from sudden termination "
+        msg5="please end $fname ($pid) to help ensure that shared HPC resources are used fairly.\n\n"
+        msg6="HPC team\nhpc3@vai.org"
+        
+        send="$msg$msg1$msg2$msg3$msg4$msg5$msg6"
+        grep -qF -- "$line" "$file" || `printf "$send" | mail -v -s "$fname ($pid)" $user@vai.org,matthew.hoffman@vai.org`
       fi
       d=`date +%Y%m%d%H%M`
       grep -qF -- "$line" "$file" || echo "$line $d" >> "$file"
@@ -130,12 +134,8 @@ file=".ps.txt"
 # pull the total amount of system memory from meminfo
 TOTAL_MEM=`/usr/bin/awk '/MemTotal/ {a=$2} END{printf("%d", a)}' /proc/meminfo`
 
-# default to 25% of TOTAL_MEM, if not set on the command line
 [ -z "$PERCENTAGE_MEM" ] && PERCENTAGE_MEM=4
-
 [ -z "$PERCENTAGE_CPU" ] && PERCENTAGE_CPU=20
-
-# default to 5 minutes if not set on the command line
 [ -z "$ALLOWED_TIME" ] && ALLOWED_TIME=5
 [ -z "$END" ] && END=0
 [ -z "$ALERT_USER" ] && ALERT_USER=0

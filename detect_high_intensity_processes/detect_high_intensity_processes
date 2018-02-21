@@ -21,29 +21,31 @@
 #           ex: "pcpu", "size"
 ########################################
 function process_ps(){
+
+  if [[ "$1" == "size" ]]; then
+    max="$MAX_ALLOWED_MEM"
+    type="memory"
+    cmd="$(/usr/bin/ps -eo user:35,uid,pid,fname,$1 --sort $1 | /usr/bin/tail)"
+  else
+    type="of the cpu"
+    max="$PERCENTAGE_CPU"
+    cmd="$(top -o %CPU -b -n 2 | head -n 17 | sed 1,7d)"
+  fi
+  
+  [ -z "$max" ] && max=999999999
+
   while read -r line; do
 
-    # separate each line by whitespace and assign variables
     arr=($line)
     user=${arr[0]}
     uid=${arr[1]}
     pid=${arr[2]}
     fname=${arr[3]}
     check=${arr[4]}
-
+    check=$(printf "%.0f" "$check")
+    
     host=`hostname`
     line="$user $fname $pid"
-
-    if [[ "$1" == "size" ]]; then
-      max="$MAX_ALLOWED_MEM"
-      type="memory"
-    else
-      check=$(printf "%.0f" "$check")
-      type="of the cpu"
-      max="$PERCENTAGE_CPU"
-    fi
-
-    [ -z "$max" ] && max=999999999
 
     # if the the process is using more of the resource than allowed and user is not a
     # system user, alert the user and send to system log 
@@ -56,17 +58,21 @@ function process_ps(){
         msg2="$host.hpc.vai.org is a shared resource intended solely for job submission, "
         msg3="all high intensity processes should be run on a compute node. "
         msg4="Your process will be terminated soon. To prevent any loss of data from sudden termination "
-        msg5="please end $fname ($pid) to help ensure that shared HPC resources are used fairly.\n\n"
+        msg5="please end $fname ($pid) and help ensure that shared HPC resources are used fairly.\n\n"
         msg6="HPC team\nhpc3@vai.org"
         
         send="$msg$msg1$msg2$msg3$msg4$msg5$msg6"
-        grep -qF -- "$line" "$file" || `printf "$send" | mail -v -s "$fname ($pid)" $user@vai.org,matthew.hoffman@vai.org`
+        #grep -qF -- "$line" "$file" || `printf "$send" | mail -v -s "$fname ($pid)" $user@vai.org,matthew.hoffman@vai.org`
+        grep -qF -- "$line" "$file" || `printf "$send" | mail -v -s "$fname ($pid)" matthew.hoffman@vai.org`
       fi
+
       d=`date +%Y%m%d%H%M`
       grep -qF -- "$line" "$file" || echo "$line $d" >> "$file"
-      grep -qF -- "$line" "$file" || /usr/bin/logger "Process $fname ($pid) owned by $user is using more $type than  allowed on $host."
+      grep -qF -- "$line" "$file" || /usr/bin/logger "High intensity process $fname ($pid) owned by $user is using more $type than allowed on $host."
+      grep -qF -- "$line" "$file" || echo "EVENT_SEVERITY_WARNING:Process $fname ($pid) owned by $user is using more $type than allowed on $host." > /var/spool/cmd/eventbucket
     fi
-  done <<< "$(/usr/bin/ps -eo user:35,uid,pid,fname,$1 --sort $1 | /usr/bin/tail)"
+
+  done <<< $cmd
 }
 
 function end(){
@@ -147,7 +153,7 @@ MAX_ALLOWED_MEM=$((TOTAL_MEM / PERCENTAGE_MEM))
 # Run
 ########
 
-/usr/bin/logger "Running detect_high_intensity_processes with ALERT_USER:$ALERT_USER END_PROCESS:$END MAX_MEM:$MAX_ALLOWED_MEM MAX_CPU:$PERCENTAGE_CPU TIME:$ALLOWED_TIME min"
+#/usr/bin/logger "Running detect_high_intensity_processes with ALERT_USER:$ALERT_USER END_PROCESS:$END MAX_MEM:$MAX_ALLOWED_MEM MAX_CPU:$PERCENTAGE_CPU TIME:$ALLOWED_TIME min"
 
 process_ps "size"
 process_ps "pcpu"

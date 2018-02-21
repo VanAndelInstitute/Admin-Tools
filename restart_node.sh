@@ -1,16 +1,5 @@
 #!/bin/bash
 
-##############################################################
-#  
-#  Author     : Matthew Hoffman
-#  Company    : Van Andel Institute
-#  Description: 
-#  Allow certain users the priveleges to restart nodes that
-#  are owned by their group. Nodes are reset using Bright's
-#  cmsh 
-#
-##############################################################
-
 # Verify the user is part of a group with the right privileges
 check_group(){
   
@@ -20,25 +9,28 @@ check_group(){
   # hpcadmins can restart any node
   if id -nG "$SUDO_USER" | grep -qw "hpcadmins"; then OK=0;
   
-  # li users can restart any node in the set [61, 63]
+  # li users can restart any node between 61 and 63 inclusive
   elif id -nG "$SUDO_USER" | grep -qw "hli.lab-modify"; then
-    if [ "$NODE" -ge 61 -a "$NODE" -le 63 ]; then OK=0; fi
+    if [ "$NODE" -ge 61 -a "$NODE" -le 63 ]; then OK=0; 
+    else echo $SUDO_USER cannot restart node$NODE... Exiting; fi
 
-  # bio users can restart any node in the set [65,68]U[201,203]
+  # bio users can restart any node between 65 and 68 inclusive and 201 and 203 inclusive
   elif id -nG "$SUDO_USER" | grep -qw "bioinformatics-modify"; then 
     if [ "$NODE" -ge 65 -a "$NODE" -le 68 ]; then OK=0;
-    elif [ "$NODE" -ge 201 -a "$NODE" -le 203 ]; then OK=0; fi
+    elif [ "$NODE" -ge 201 -a "$NODE" -le 203 ]; then OK=0; 
+    else echo $SUDO_USER cannot restart node$NODE... Exiting; fi
 
   # if none of the previous patterns match, user cannot restart the node, exit
   else											
-    echo $SUDO_USER cannot restart that node... Exiting
+    echo $SUDO_USER cannot restart node$NODE... Exiting
+    logger $SUDO_USER cannot restart node$NODE... Exiting
     exit 0				
   fi
 }
 
 # Use the Bright cmsh to reset the node via IPMI
 reset_node(){
-   cmsh -c "device power -n node$NODE reset" 
+  cmsh -c "device power -n node$NODE reset" 
 }
 
 # Have the user confirm that they wish to restart the node requested
@@ -65,6 +57,7 @@ check_group
 if [ "$OK" -eq 0 ]; then
   verify_input
   echo Restarting node$NODE
+  logger $SUDO_USER restarted node$NODE
   reset_node
 fi
 

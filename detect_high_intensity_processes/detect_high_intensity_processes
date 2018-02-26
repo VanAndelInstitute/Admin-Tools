@@ -11,6 +11,7 @@
 #   ex: ./detect_high_intensity_processes -t 5, sets the time allowed to 5 minutes (default is 5)
 #   the -e option is required to automatically end processes (not set by default)                                                                     
 #   the -a option is required to alert users (not set by default)
+#   the -v option enables additional output to the logs
 #
 ################################################################################################################################
 
@@ -40,13 +41,13 @@ function process_ps(){
       check=$cpu
       max="$PERCENTAGE_CPU"
     fi
-      
-    check=$(printf "%.0f" "$check")
-    [ -z "$max" ] && max=999999999
-    /usr/bin/logger "$type"
-    /usr/bin/logger "$user $pid $fname $check"
     
-    host=`hostname`
+    [ -z "$max" ] && max=999999999
+    
+    # round float to int  
+    check=$(printf "%.0f" "$check")
+    
+    host=$(hostname)
     line="$user $fname $pid"
 
     # if the the process is using more of the resource than allowed and user is not a
@@ -64,13 +65,14 @@ function process_ps(){
         msg6="HPC team\nhpc3@vai.org"
         
         send="$msg$msg1$msg2$msg3$msg4$msg5$msg6"
-        #grep -qF -- "$line" "$file" || `printf "$send" | mail -v -s "$fname ($pid)" $user@vai.org,matthew.hoffman@vai.org`
-        grep -qF -- "$line" "$file" || `printf "$send" | mail -v -s "$fname ($pid)" matthew.hoffman@vai.org`
+        #grep -qF -- "$line" "$file" || printf "$send" | mail -v -s "$fname ($pid)" $user@vai.org,matthew.hoffman@vai.org
+        grep -qF -- "$line" "$file" || printf "$send" | mail -v -s "$fname ($pid)" matthew.hoffman@vai.org
       fi
 
-      d=`date +%Y%m%d%H%M`
-      grep -qF -- "$line" "$file" || /usr/bin/logger "High intensity process $fname ($pid) owned by $user is using more $type than allowed on $host."
-      #grep -qF -- "$line" "$file" || echo "EVENT_SEVERITY_WARNING:Process $fname ($pid) owned by $user is using more $type than allowed on $host." > /var/spool/cmd/eventbucket
+      d=$(date +%Y%m%d%H%M)
+      
+      grep -qF -- "$line" "$file" || log "High intensity process $fname ($pid) owned by $user is using more $type than allowed on $host."
+      grep -qF -- "$line" "$file" || echo "EVENT_SEVERITY_WARNING:Process $fname ($pid) owned by $user is using more $type than allowed on $host." > /var/spool/cmd/eventbucket
       grep -qF -- "$line" "$file" || echo "$line $d" >> "$file"
     fi
 
@@ -86,7 +88,7 @@ function end(){
     pid=${arr[2]}
     t=${arr[3]}
 
-    date=`date +%Y%m%d%H%M`
+    date=$(date +%Y%m%d%H%M)
 
     date=${date#0}
     t=${t#0}
@@ -98,25 +100,35 @@ function end(){
       sed -i "/$pid/d" $file 
       
       if [[ "$END" -eq 1 ]]; then
-        /usr/bin/logger "Automatically ended high intensity process: $fname ($pid) owned by $user"
-        `killall $fname -u $user`
+        log "Automatically ended high intensity process: $fname ($pid) owned by $user"
+        killall $fname -u $user
       fi
     fi
 
   done < $file
 }
 
+function log(){
+  logger_path="/usr/bin/logger"
+  if [[ "$VERBOSE" -eq 1 ]]; then
+    $logger_path $1
+  fi
+}
+
 # POSIX Variable require for getopts
 OPTIND=1                                                                        
 
 # read in command line arguments
-while getopts "ae?c:t:m:" opt; do                                                
+while getopts "aev?c:t:m:" opt; do                                                
   case "$opt" in                                                                
     e)
       END=1    
       ;;
     a)
       ALERT_USER=1
+      ;;
+    v)
+      VERBOSE=1
       ;;
     c)                                                                          
       PERCENTAGE_CPU=$OPTARG                                                        
@@ -139,12 +151,11 @@ shift $((OPTIND-1))
 
 file=".ps.txt"
 
-# pull the total amount of system memory from meminfo
-TOTAL_MEM=`/usr/bin/awk '/MemTotal/ {a=$2} END{printf("%d", a)}' /proc/meminfo`
-
+# set variables to default values if not set on the command line
 [ -z "$PERCENTAGE_MEM" ] && PERCENTAGE_MEM=75
 [ -z "$PERCENTAGE_CPU" ] && PERCENTAGE_CPU=20
 [ -z "$ALLOWED_TIME" ] && ALLOWED_TIME=5
+[ -z "$VERBOSE" ] && VERBOSE=0
 [ -z "$END" ] && END=0
 [ -z "$ALERT_USER" ] && ALERT_USER=0
 
@@ -152,7 +163,7 @@ TOTAL_MEM=`/usr/bin/awk '/MemTotal/ {a=$2} END{printf("%d", a)}' /proc/meminfo`
 # Run
 ########
 
-/usr/bin/logger "Running detect_high_intensity_processes with ALERT_USER:$ALERT_USER END_PROCESS:$END MAX_MEM:$MAX_ALLOWED_MEM MAX_CPU:$PERCENTAGE_CPU TIME:$ALLOWED_TIME min"
+log "Running detect_high_intensity_processes with ALERT_USER:$ALERT_USER END_PROCESS:$END MAX_MEM:$PERCENTAGE_MEM MAX_CPU:$PERCENTAGE_CPU TIME:$ALLOWED_TIME min"
 
 process_ps "size"
 process_ps "pcpu"

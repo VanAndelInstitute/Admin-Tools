@@ -6,7 +6,7 @@
 #  Company    : Van Andel Institute
 #  Description: 
 #  Automatically detect, log and end high memory/CPU processes on the head node
-#   ex: ./detect_high_intensity_processes -m 6, sets the percentage to 1/6 total mem (default is 4 or 25%)
+#   ex: ./detect_high_intensity_processes -m 25, sets the percentage to 25%  total mem (default is 25%)
 #   ex: ./detect_high_intensity_processes -c 15, sets the percentage to 15% of the CPU (default is 20%)
 #   ex: ./detect_high_intensity_processes -t 5, sets the time allowed to 5 minutes (default is 5)
 #   the -e option is required to automatically end processes (not set by default)                                                                     
@@ -22,18 +22,6 @@
 ########################################
 function process_ps(){
 
-  if [[ "$1" == "size" ]]; then
-    max="$MAX_ALLOWED_MEM"
-    type="memory"
-    cmd="$(/usr/bin/ps -eo user:35,uid,pid,fname,$1 --sort $1 | /usr/bin/tail)"
-  else
-    type="of the cpu"
-    max="$PERCENTAGE_CPU"
-    cmd="$(top -o %CPU -b -n 2 | head -n 17 | sed 1,7d)"
-  fi
-  
-  [ -z "$max" ] && max=999999999
-
   while read -r line; do
 
     arr=($line)
@@ -41,8 +29,22 @@ function process_ps(){
     uid=${arr[1]}
     pid=${arr[2]}
     fname=${arr[3]}
-    check=${arr[4]}
+    cpu=${arr[4]}
+    mem=${arr[5]}
+    
+    if [[ "$1" == "size" ]]; then
+      check=$mem
+      max="$PERCENTAGE_MEM"
+      type="memory"
+    else
+      check=$cpu
+      max="$PERCENTAGE_CPU"
+    fi
+      
     check=$(printf "%.0f" "$check")
+    [ -z "$max" ] && max=999999999
+    /usr/bin/logger "$type"
+    /usr/bin/logger "$user $pid $fname $check"
     
     host=`hostname`
     line="$user $fname $pid"
@@ -67,12 +69,12 @@ function process_ps(){
       fi
 
       d=`date +%Y%m%d%H%M`
-      grep -qF -- "$line" "$file" || echo "$line $d" >> "$file"
       grep -qF -- "$line" "$file" || /usr/bin/logger "High intensity process $fname ($pid) owned by $user is using more $type than allowed on $host."
-      grep -qF -- "$line" "$file" || echo "EVENT_SEVERITY_WARNING:Process $fname ($pid) owned by $user is using more $type than allowed on $host." > /var/spool/cmd/eventbucket
+      #grep -qF -- "$line" "$file" || echo "EVENT_SEVERITY_WARNING:Process $fname ($pid) owned by $user is using more $type than allowed on $host." > /var/spool/cmd/eventbucket
+      grep -qF -- "$line" "$file" || echo "$line $d" >> "$file"
     fi
 
-  done <<< $cmd
+  done <<< $(top -o %CPU -b -n 2 | head -n 17 | sed 1,7d)
 }
 
 function end(){
@@ -140,20 +142,17 @@ file=".ps.txt"
 # pull the total amount of system memory from meminfo
 TOTAL_MEM=`/usr/bin/awk '/MemTotal/ {a=$2} END{printf("%d", a)}' /proc/meminfo`
 
-[ -z "$PERCENTAGE_MEM" ] && PERCENTAGE_MEM=4
+[ -z "$PERCENTAGE_MEM" ] && PERCENTAGE_MEM=75
 [ -z "$PERCENTAGE_CPU" ] && PERCENTAGE_CPU=20
 [ -z "$ALLOWED_TIME" ] && ALLOWED_TIME=5
 [ -z "$END" ] && END=0
 [ -z "$ALERT_USER" ] && ALERT_USER=0
 
-# set the maximum allowed memory for a user process
-MAX_ALLOWED_MEM=$((TOTAL_MEM / PERCENTAGE_MEM))
-
 ########
 # Run
 ########
 
-#/usr/bin/logger "Running detect_high_intensity_processes with ALERT_USER:$ALERT_USER END_PROCESS:$END MAX_MEM:$MAX_ALLOWED_MEM MAX_CPU:$PERCENTAGE_CPU TIME:$ALLOWED_TIME min"
+/usr/bin/logger "Running detect_high_intensity_processes with ALERT_USER:$ALERT_USER END_PROCESS:$END MAX_MEM:$MAX_ALLOWED_MEM MAX_CPU:$PERCENTAGE_CPU TIME:$ALLOWED_TIME min"
 
 process_ps "size"
 process_ps "pcpu"

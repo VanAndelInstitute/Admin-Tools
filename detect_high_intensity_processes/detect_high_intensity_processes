@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 ################################################################################################################################
 #  
@@ -47,6 +47,7 @@ function process_ps(){
     
     # round float to int  
     check=$(printf "%.0f" "$check")
+    
     host=$(hostname)
     line="$user $fname $pid"
 
@@ -152,7 +153,7 @@ shift $((OPTIND-1))
 file=".ps.txt"
 
 # set variables to default values if not set on the command line
-[ -z "$PERCENTAGE_MEM" ] && PERCENTAGE_MEM=75
+[ -z "$PERCENTAGE_MEM" ] && PERCENTAGE_MEM=25
 [ -z "$PERCENTAGE_CPU" ] && PERCENTAGE_CPU=20
 [ -z "$ALLOWED_TIME" ] && ALLOWED_TIME=5
 [ -z "$VERBOSE" ] && VERBOSE=0

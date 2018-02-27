@@ -19,7 +19,7 @@
 # Check for high intensity processes
 # 
 # @param: string, the type of resource
-#           ex: "pcpu", "size"
+#           ex: "CPU", "MEM"
 ########################################
 function process_ps(){
 
@@ -33,10 +33,11 @@ function process_ps(){
     cpu=${arr[4]}
     mem=${arr[5]}
     
-    if [[ "$1" == "size" ]]; then
+    if [[ "$1" == "MEM" ]]; then
       check=$mem
       max="$PERCENTAGE_MEM"
       type="memory"
+      check=$(echo "$check" | tr -d g)
     else
       check=$cpu
       max="$PERCENTAGE_CPU"
@@ -46,7 +47,6 @@ function process_ps(){
     
     # round float to int  
     check=$(printf "%.0f" "$check")
-    
     host=$(hostname)
     line="$user $fname $pid"
 
@@ -76,7 +76,7 @@ function process_ps(){
       grep -qF -- "$line" "$file" || echo "$line $d" >> "$file"
     fi
 
-  done <<< $(top -o %CPU -b -n 2 | head -n 17 | sed 1,7d)
+  done <<< $(top -o %$1 -b -n 2 | head -n 17 | sed 1,7d)
 }
 
 function end(){
@@ -165,7 +165,7 @@ file=".ps.txt"
 
 log "Running detect_high_intensity_processes with ALERT_USER:$ALERT_USER END_PROCESS:$END MAX_MEM:$PERCENTAGE_MEM MAX_CPU:$PERCENTAGE_CPU TIME:$ALLOWED_TIME min"
 
-process_ps "size"
-process_ps "pcpu"
+process_ps "MEM"
+process_ps "CPU"
 
 end

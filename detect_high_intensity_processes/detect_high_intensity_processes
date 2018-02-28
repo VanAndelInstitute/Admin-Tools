@@ -1,17 +1,20 @@
-#!/bin/bash
+#/bin/bash
 
 ################################################################################################################################
 #  
 #  Author     : Matthew Hoffman
 #  Company    : Van Andel Institute
 #  Description: 
-#  Automatically detect, log and end high memory/CPU processes on the head node
+#  Automatically detect, log and end high memory/CPU processes 
 #   ex: ./detect_high_intensity_processes -m 25, sets the percentage to 25%  total mem (default is 25%)
 #   ex: ./detect_high_intensity_processes -c 15, sets the percentage to 15% of the CPU (default is 20%)
 #   ex: ./detect_high_intensity_processes -t 5, sets the time allowed to 5 minutes (default is 5)
+#       the -t option determines the time between when processes are detected
+#       and when they should be ended. if the -e option is not used, the -t
+#       flag sets the time between consecutive alerts.
 #   the -e option is required to automatically end processes (not set by default)                                                                     
 #   the -a option is required to alert users (not set by default)
-#   the -v option enables additional output to the logs
+#   the -v option enables additional output to the logs (not set by default)
 #
 ################################################################################################################################
 
@@ -23,6 +26,29 @@
 ########################################
 function process_ps(){
 
+  total_cpu_load=$(echo "$current_top" | head -3 | awk ' /^%Cpu/ { print $2 }') 
+  total_mem_load=$(echo "$current_top" | head -4 | awk ' /^KiB/ { print $8 / $4 }') 
+ 
+  [ -z "$total_mem_load" ] && total_mem_load=0 
+  [ -z "$total_cpu_load" ] && total_cpu_load=0 
+ 
+  total_cpu_load=$(printf "%.0f" "$total_cpu_load")
+  total_mem_load=$(printf "%.0f" "$total_mem_load")
+  
+  if [[ "$total_cpu_load" -ge 85 ]]; then
+    line="Total CPU load on $host is greater than or equal to 85%"
+    log "$line" 
+    mail -v -s "$line" matthew.hoffman@vai.org
+  fi
+  
+  if [[ "$total_mem_load" -ge 85 ]]; then
+    line="Total memory load on $host is greater than or equal to 85%"
+    log "$line"
+    mail -v -s "$line" matthew.hoffman@vai.org
+  fi
+  
+  current_top=$(top -o %$1 -b -n 2 | head -17)
+  
   while read -r line; do
 
     arr=($line)
@@ -32,14 +58,18 @@ function process_ps(){
     fname=${arr[3]}
     cpu=${arr[4]}
     mem=${arr[5]}
-    
+ 
+    tm=$(echo "$current_top" | awk -v p="$user" '$0 ~ p { print $4, $6}' | awk -v p=$fname '$0 ~ p { tot += $2; n += 1; } END { print tot; }') 
+    tc=$(echo "$current_top" | awk -v p="$user" '$0 ~ p { print $4, $5}' | awk -v p=$fname '$0 ~ p { tot += $2; n += 1; } END { print tot; }') 
+ 
     if [[ "$1" == "MEM" ]]; then
-      check=$mem
+      check=$tm
       max="$PERCENTAGE_MEM"
       type="memory"
       check=$(echo "$check" | tr -d g)
     else
-      check=$cpu
+      check=$tc
+      type="of the cpu"
       max="$PERCENTAGE_CPU"
     fi
     
@@ -49,11 +79,11 @@ function process_ps(){
     check=$(printf "%.0f" "$check")
     
     host=$(hostname)
-    line="$user $fname $pid"
-
+    line="$user $fname"
+    
     # if the the process is using more of the resource than allowed and user is not a
     # system user, alert the user and send to system log 
-    if [[ "$check" -ge "$max" ]] && [[ "$uid" -gt 500 ]]; then
+    if [[ "$check" -ge "$max" ]] && [[ "$uid" -gt 500 ]] && [[ "$fname" != "chrome" ]]; then
       if [[ "$ALERT_USER" -eq 1 ]]; then
         first_name=$(echo ${user^} | cut -d "." -f 1)
         
@@ -73,11 +103,11 @@ function process_ps(){
       d=$(date +%Y%m%d%H%M)
       
       grep -qF -- "$line" "$file" || log "High intensity process $fname ($pid) owned by $user is using more $type than allowed on $host."
-      grep -qF -- "$line" "$file" || echo "EVENT_SEVERITY_WARNING:Process $fname ($pid) owned by $user is using more $type than allowed on $host." > /var/spool/cmd/eventbucket
-      grep -qF -- "$line" "$file" || echo "$line $d" >> "$file"
+      #grep -qF -- "$line" "$file" || echo "EVENT_SEVERITY_WARNING:Process $fname ($pid) owned by $user is using more $type than allowed on $host." > /var/spool/cmd/eventbucket
+      grep -qF -- "$line" "$file" || echo "$line $pid $d" >> "$file"
     fi
 
-  done <<< $(top -o %$1 -b -n 2 | head -n 17 | sed 1,7d)
+  done <<< $(echo "$current_top" | sed 1,7d)
 }
 
 function end(){
@@ -93,7 +123,7 @@ function end(){
 
     date=${date#0}
     t=${t#0}
-
+    
     dif=$(($date-$t))
 
     if [[ "$dif" -ge "$ALLOWED_TIME" ]]; then
@@ -151,9 +181,10 @@ shift $((OPTIND-1))
 [ "$1" = "--" ] && shift  
 
 file=".ps.txt"
+messages="/var/log/messages"
 
 # set variables to default values if not set on the command line
-[ -z "$PERCENTAGE_MEM" ] && PERCENTAGE_MEM=25
+[ -z "$PERCENTAGE_MEM" ] && PERCENTAGE_MEM=75
 [ -z "$PERCENTAGE_CPU" ] && PERCENTAGE_CPU=20
 [ -z "$ALLOWED_TIME" ] && ALLOWED_TIME=5
 [ -z "$VERBOSE" ] && VERBOSE=0
@@ -166,7 +197,7 @@ file=".ps.txt"
 
 log "Running detect_high_intensity_processes with ALERT_USER:$ALERT_USER END_PROCESS:$END MAX_MEM:$PERCENTAGE_MEM MAX_CPU:$PERCENTAGE_CPU TIME:$ALLOWED_TIME min"
 
-process_ps "MEM"
-process_ps "CPU"
+process_ps "MEM" 
+process_ps "CPU" 
 
 end

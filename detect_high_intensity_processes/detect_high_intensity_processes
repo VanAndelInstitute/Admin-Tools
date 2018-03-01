@@ -36,15 +36,15 @@ function process_ps(){
   total_mem_load=$(printf "%.0f" "$total_mem_load")
   
   if [[ "$total_cpu_load" -ge 85 ]]; then
-    line="Total CPU load on $host is greater than or equal to 85%"
+    line="Total CPU load on $host is greater than or equal to 85 percent"
     log "$line" 
-    mail -v -s "$line" matthew.hoffman@vai.org
+    send_email "$line" "High load on $host"
   fi
   
   if [[ "$total_mem_load" -ge 85 ]]; then
-    line="Total memory load on $host is greater than or equal to 85%"
+    line="Total memory load on $host is greater than or equal to percent"
     log "$line"
-    mail -v -s "$line" matthew.hoffman@vai.org
+    send_email "$line" "High load on $host"
   fi
   
   current_top=$(top -o %$1 -b -n 2 | head -17)
@@ -96,8 +96,8 @@ function process_ps(){
         msg6="HPC team\nhpc3@vai.org"
         
         send="$msg$msg1$msg2$msg3$msg4$msg5$msg6"
-        #grep -qF -- "$line" "$file" || printf "$send" | mail -v -s "$fname ($pid)" $user@vai.org,matthew.hoffman@vai.org
-        grep -qF -- "$line" "$file" || printf "$send" | mail -v -s "$fname ($pid)" matthew.hoffman@vai.org
+        #grep -qF -- "$line" "$file" || send_mail "$send" "$fname ($pid)" "$user"
+        grep -qF -- "$line" "$file" || send_email "$send" "$fname ($pid)" 
       fi
 
       d=$(date +%Y%m%d%H%M)
@@ -143,6 +143,22 @@ function log(){
   logger_path="/usr/bin/logger"
   if [[ "$VERBOSE" -eq 1 ]]; then
     $logger_path $1
+  fi
+}
+
+function send_email(){
+  mail_path="/usr/bin/mail"
+  email_domain="vai.org"
+  admin_user_email="matthew.hoffman@$email_domain"
+  
+  message=$1
+  subject=$2  
+  user_email=$3@$email_domain
+  
+  if [[ "$3" == "" ]]; then
+    printf "$message" | mail -v -s "$subject" $admin_user_email
+  else
+    printf "$message" | mail -v -s "$subject" $user_email,$admin_user_email
   fi
 }
 

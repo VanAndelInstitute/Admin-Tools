@@ -27,7 +27,7 @@ check_group(){
       exit 0
     fi
     
-    if [[ "$SUDO_USER" == "tim.triche" ]]; then OK=0;
+    if [[ "$SUDO_USER" == "tim.triche" ]] || [[ "$SUDO_USER" == "lyong.heo" ]]; then OK=0;
     else echo $SUDO_USER cannot modify the $queue queue... Exiting; fi
   elif [[ "$queue" == "bbc" ]]; then
 
@@ -49,7 +49,7 @@ list_users_in_queue(){
     exit 0
   fi
   
-  users=$(/cm/shared/apps/torque/6.0.2/bin/qstat -Qf | grep -A 15 $queue | grep -A 1 acl_users | sed 's/.*=//' | tr -d " \t\n\r")
+  users=$(/cm/shared/apps/torque/6.0.2/bin/qstat -Qf | grep -A 15 $queue | grep -A 1 acl_users | sed 's/.*=//' | tr -d " \t\n\r" | tr -d 0-9 | tr -d :)
   
   if [[ "$users" == "" ]]; then
     echo "No users are defined. This queue is available to all HPC users."
@@ -90,23 +90,24 @@ show_help(){
   printf "  -l\t\tlist the users allowed to submit jobs to the queue supplied. Does not require a user to be supplied.\n"
   printf "  -o\t\tthe action to be taken: add, remove\n\t\t  defaults to add when not specified\n"
   printf "  -q\t\tthe queue to be modified. mandatory parameter\n"
-  printf "  -u\t\tthe user to be modified. mandatory parameter\n"
+  printf "  -u\t\tthe user to be modified. If not supplied, list users with accesss to the given queue.\n"
 }
 
 validate(){
 
   if [[ "$SUDO_USER" == "" ]]; then
-    echo "modify_queue requires sudo access... Exiting"
+    echo "modify_queue requires sudo access"
+    echo "Try 'sudo ./modify_queue ...'"
     exit 0
   fi
 
-  if [[ "$user" == "" ]]; then
-    echo Please specify a user... Exiting
+  if [[ "$queue" == "" ]]; then
+    echo Please specify a queue... Exiting
     exit 0
   fi
   
-  if [[ "$queue" == "" ]]; then
-    echo Please specify a queue... Exiting
+  if [[ "$user" == "" ]]; then
+    list_users_in_queue
     exit 0
   fi
 

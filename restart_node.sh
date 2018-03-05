@@ -19,6 +19,10 @@ check_group(){
     if [ "$NODE" -ge 65 -a "$NODE" -le 68 ]; then OK=0;
     elif [ "$NODE" -ge 201 -a "$NODE" -le 203 ]; then OK=0; 
     else echo $SUDO_USER cannot restart node$NODE... Exiting; fi
+  
+  elif id -nG "$SUDO_USER" | grep -qw "triche.lab-modify"; then
+    if [ "$NODE" -ge 69 -a "$NODE" -le 72 ]; then OK=0;
+    else echo $SUDO_USER cannot restart node$NODE... Exiting; fi
 
   # if none of the previous patterns match, user cannot restart the node, exit
   else											

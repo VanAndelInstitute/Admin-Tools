@@ -83,7 +83,7 @@ function process_ps(){
     
     # if the the process is using more of the resource than allowed and user is not a
     # system user, alert the user and send to system log 
-    if [[ "$check" -ge "$max" ]] && [[ "$uid" -gt 500 ]] && [[ "$fname" != "chrome" ]]; then
+    if [[ "$check" -ge "$max" ]] && [[ "$uid" -gt 500 ]]; then
       if [[ "$ALERT_USER" -eq 1 ]]; then
         first_name=$(echo ${user^} | cut -d "." -f 1)
         

@@ -81,8 +81,8 @@ foreach $k (sort keys %nodeprops)
 		$msg .= "For questions or concerns, please contact hpc3\@vai.org\n";
 		$msg .= "Thanks, \n";
 		$msg .= "-The HPC3 Admins \n";
-		email("$userName\@vai.org","HPC3 automatic idle job alert for job #$jobName",$msg) if $load eq "0.00" ;
-		#email("zack.ramjan\@vai.org","HPC3 automatic idle job alert for job #$jobName",$msg) if $load eq "0.00" ;
+		email("$userName\@vai.org","HPC3 automatic idle job alert for job #$jobName ",$msg) if $load eq "0.00" ;
+		#email("zack.ramjan\@vai.org","HPC3 automatic idle job alert for job #$jobName: $userName\@vai.org ",$msg) if $load eq "0.00" ;
 		system("logger -t PBS_IDLE $userName running pbs job# $jobName on $nodeName is running an idle job with load 0.00 , user has been emailed") if $load eq "0.00";
 	}
 }

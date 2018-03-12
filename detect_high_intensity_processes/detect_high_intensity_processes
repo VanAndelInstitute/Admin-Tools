@@ -158,7 +158,8 @@ function send_email(){
   if [[ "$3" == "" ]]; then
     printf "$message" | mail -v -s "$subject" $admin_user_email
   else
-    printf "$message" | mail -v -s "$subject" $user_email,$admin_user_email
+    printf "noop"
+    #printf "$message" | mail -v -s "$subject" $user_email,$admin_user_email
   fi
 }
 

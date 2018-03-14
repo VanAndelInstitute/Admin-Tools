@@ -1,4 +1,5 @@
-#/bin/bash
+#!/bin/bash
+PATH=/usr/bin:/primary/vari/software/pbsPretty/
 
 ################################################################################################################################
 #  
@@ -6,17 +7,16 @@
 #  Company    : Van Andel Institute
 #  Description:
 #  Send an email when a node is detected as having active processes
-#  outside of Torque.
 # 
 ################################################################################################################################
 
 function check(){
-  active_nodes=$(perl /primary/vari/software/pbsPretty/pbsnodez | grep "has active processes" | awk '{ printf "\n\n" $1 }')
-
+  active_nodes=$(pbsnodez | grep "has active processes" | awk '{ printf "\n\n" $1 }')
+  
   echo "$active_nodes" | while read -r line; do
     n=$(echo "$line" | cut -c 6-)
     if [[ "$n" != "" ]] && [[ "$n" != "node061" ]] && [[ "$n" != "node062" ]] && [[ "$n" != "node063" ]]; then 
-      logger "$n has active processes outside of torque." 
+      logger "$n is FREE but has active processes." 
     fi
   done 
 }

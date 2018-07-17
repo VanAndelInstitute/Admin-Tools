@@ -22,6 +22,11 @@ my $maxDaily = 6;
 my $maxWeekly = 4;
 my $weeklySnapShotDay = "Sat";
 
+
+#make sure this is not already running, die if we are.
+my @numprocs = `pgrep -f rotateSnapshots.pl`;
+print STDERR scalar(@numprocs);
+die "already running\n" if scalar(@numprocs) != 1;
 my $fs = $ARGV[0];
 die  "specify GPFS device" unless $fs eq "scratch" || $fs eq "home";
 

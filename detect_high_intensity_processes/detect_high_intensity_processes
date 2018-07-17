@@ -83,7 +83,7 @@ function process_ps(){
     
     # if the the process is using more of the resource than allowed and user is not a
     # system user, alert the user and send to system log 
-    if [[ "$check" -ge "$max" ]] && [[ "$uid" -gt 500 ]]; then
+    if [[ "$check" -ge "$max" ]] && [[ "$uid" -gt 135180000 ]]; then
       if [[ "$ALERT_USER" -eq 1 ]]; then
         first_name=$(echo ${user^} | cut -d "." -f 1)
         
@@ -103,7 +103,6 @@ function process_ps(){
       d=$(date +%Y%m%d%H%M)
       
       grep -qF -- "$line" "$file" || log "High intensity process $fname ($pid) owned by $user is using more $type than allowed on $host."
-      #grep -qF -- "$line" "$file" || echo "EVENT_SEVERITY_WARNING:Process $fname ($pid) owned by $user is using more $type than allowed on $host." > /var/spool/cmd/eventbucket
       grep -qF -- "$line" "$file" || echo "$line $pid $d" >> "$file"
     fi
 
@@ -129,12 +128,19 @@ function end(){
     if [[ "$dif" -ge "$ALLOWED_TIME" ]]; then
       
       sed -i "/$pid/d" $file 
-      
+     
       if [[ "$END" -eq 1 ]]; then
         log "Automatically ended high intensity process: $fname ($pid) owned by $user"
         killall $fname -u $user
       fi
     fi
+  
+  # End relion and its related processes if they cross the threshold, no matter what 
+  if [[ "$fname" =~ relion ]] || [[ "$fname" =~ R ]]; then
+    sed -i "/$pid/d" $file 
+    log "Automatically ended high intensity process: $fname ($pid) owned by $user"
+    killall -u $user
+  fi     
 
   done < $file
 }

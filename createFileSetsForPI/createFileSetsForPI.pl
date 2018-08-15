@@ -16,6 +16,7 @@ my $LINK = "/usr/lpp/mmfs/bin/mmlinkfileset";
 my $LS = "/usr/lpp/mmfs/bin/mmlsfileset";
 my $LSQ = "/usr/lpp/mmfs/bin/mmlsquota";
 my $ED = "/usr/lpp/mmfs/bin/mmedquota";
+my $SQ = "/usr/lpp/mmfs/bin/mmsetquota";
  
 my $pi = shift @ARGV;
 die unless $pi;
@@ -29,11 +30,15 @@ runcmd("$CR scratch $pi");
 runcmd("$LINK home $pi -J /primary/projects/$pi");
 runcmd("$LINK scratch $pi -J /secondary/projects/$pi");
 
-runcmd("$LS home");
-runcmd("$LS scratch");
+## runcmd("$ED -j home:$pi");
+## runcmd("$ED -j scratch:$pi");
 
-runcmd("$ED -j home:$pi");
-runcmd("$ED -j scratch:$pi");
+##############################################################
+## mmsetquota scratch:lempradl --block 10T:10T
+##############################################################
+runcmd("$SQ home:$pi --block 10T:10T");
+runcmd("$SQ scratch:$pi --block 10T:10T");
+
 
 runcmd("$LSQ -j $pi home --block-size=auto");
 runcmd("$LSQ -j $pi scratch --block-size=auto");
@@ -44,6 +49,9 @@ runcmd("chgrp $pi\.lab-modify /secondary/projects/$pi");
 runcmd("chmod g+rwx /primary/projects/$pi");
 runcmd("chmod g+rwx /secondary/projects/$pi");
 
+runcmd("setfacl -m g:'domain users':--- /primary/projects/$pi");
+runcmd("setfacl -m g:'domain users':--- /secondary/projects/$pi");
+
 runcmd("setfacl -m g:$pi\.lab-full:rwx /primary/projects/$pi");
 runcmd("setfacl -m g:$pi\.lab-full:rwx /secondary/projects/$pi");
 runcmd("setfacl -m g:$pi\.lab-modify:rwx /primary/projects/$pi");
@@ -51,12 +59,25 @@ runcmd("setfacl -m g:$pi\.lab-modify:rwx /secondary/projects/$pi");
 runcmd("setfacl -m g:fs_admins:rwx /secondary/projects/$pi");
 runcmd("setfacl -m g:fs_admins:rwx /primary/projects/$pi");
 
-runcmd("setfacl -m g:$pi\.lab-read:rx /primary/projects/$pi");
-runcmd("setfacl -m g:$pi\.lab-read:rx /secondary/projects/$pi");
+runcmd("setfacl -m d:g:$pi\.lab-full:rwx /primary/projects/$pi");
+runcmd("setfacl -m d:g:$pi\.lab-full:rwx /secondary/projects/$pi");
+runcmd("setfacl -m d:g:$pi\.lab-modify:rwx /primary/projects/$pi");
+runcmd("setfacl -m d:g:$pi\.lab-modify:rwx /secondary/projects/$pi");
+runcmd("setfacl -m d:g:fs_admins:rwx /secondary/projects/$pi");
+runcmd("setfacl -m d:g:fs_admins:rwx /primary/projects/$pi");
+runcmd("setfacl -m d:g:'domain users':--- /primary/projects/$pi");
+runcmd("setfacl -m d:g:'domain users':--- /secondary/projects/$pi");
+
+## runcmd("setfacl -m g:$pi\.lab-read:rx /primary/projects/$pi");
+## runcmd("setfacl -m g:$pi\.lab-read:rx /secondary/projects/$pi");
 runcmd("setfacl -m g:fs_read:rx /secondary/projects/$pi");
 runcmd("setfacl -m g:fs_read:rx /primary/projects/$pi");
+runcmd("setfacl -m d:g:fs_read:rx /primary/projects/$pi");
+runcmd("setfacl -m d:g:fs_read:rx /secondary/projects/$pi");
 
 
+runcmd("$LS home");
+runcmd("$LS scratch");
 
 sub runcmd{
         my $cmd=shift @_;

@@ -7,9 +7,8 @@ use strict;
 #  Author     : zack ramjan
 #  Company    : Van Andel Institute
 #  Description: 
-#  Perform the regular snapshots and get rid of old ones. we keep a number of
-# trailing weeks and days and then trash the ones beyond that.
-# this is run from cron
+#  Perform the regular daily snapshots and get rid of old ones. we keep a number of days
+#  the date format must be exact so that it is compatible with the spectrumscale protocol nodes
 #
 ##############################################################
 

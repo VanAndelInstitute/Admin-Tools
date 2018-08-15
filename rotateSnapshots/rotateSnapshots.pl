@@ -11,6 +11,7 @@ use strict;
 # trailing weeks and days and then trash the ones beyond that.
 # this is run from cron
 #
+#NOTE THE DAILY WILL BE STOPPED IN FAVOR OF NEW PROTOCOL NODE REQS
 ##############################################################
 
 

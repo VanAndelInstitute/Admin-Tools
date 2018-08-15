@@ -12,6 +12,7 @@ use strict;
 # this is run from cron
 #
 #NOTE THE DAILY WILL BE STOPPED IN FAVOR OF NEW PROTOCOL NODE REQS
+#NOTE THE DAILY WILL BE STOPPED IN FAVOR OF NEW PROTOCOL NODE REQS
 ##############################################################
 
 

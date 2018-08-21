@@ -39,13 +39,14 @@ if($today eq $weeklySnapShotDay)
 	my @snapShots = getSnapShots($fs, "cronweekly");
 	removeSnapShot($fs,$snapShots[0]) if scalar(@snapShots) > $maxWeekly;
 }
+#ZR 8-21-18 Moved to another script since protocol node needs a different snapshot naming scheme.
 #otherwise its a daily snapshot
-else
-{
-	takeSnapShot($fs,"$date-crondaily");
-	my @snapShots = getSnapShots($fs, "crondaily");
-	removeSnapShot($fs,$snapShots[0]) if scalar(@snapShots) > $maxDaily;
-}
+#else
+#{
+#	takeSnapShot($fs,"$date-crondaily");
+#	my @snapShots = getSnapShots($fs, "crondaily");
+#	removeSnapShot($fs,$snapShots[0]) if scalar(@snapShots) > $maxDaily;
+#}
 
 ##################SUBS##################
 

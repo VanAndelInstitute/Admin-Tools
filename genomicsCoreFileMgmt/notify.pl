@@ -10,7 +10,7 @@ use Net::SMTP;
 #
 ##############################################################
 
-@dirs = ( "/primary/instruments/sequencing/illumina/incoming/.trash", "/primary/instruments/iscan/.trash", "/primary/projects/genomicscore/.trash");
+@dirs = ( "/primary/instruments/sequencing/illumina/incoming/.trash", "/primary/instruments/iscan/.trash", "/primary/projects/genomicscore/.trash","/primary/instruments/sequencing/novaseq/.trash");
 
 
 for my $d (@dirs)
@@ -18,8 +18,9 @@ for my $d (@dirs)
 	next unless -e $d;
 	my $out = `ls $d`;
 	my $outfull = "$d:\n" . `ls -l $d`;
-	email("marie.adams\@vai.org,julie.koeman\@vai.org,megan.bowman\@vai.org,ben.johnson\@vai.org,zack.ramjan\@vai.org","$d needs to be cleaned",$outfull) if length($out) > 5;
-	#email("zack.ramjan\@vai.org","$d needs to be cleaned", $outfull) if length($out) > 5;
+    email("marie.adams\@vai.org,ben.johnson\@vai.org,zack.ramjan\@vai.org","$d needs to be cleaned",$outfull) if length($out) > 5;
+    #email("sequencing-notifications\@vai.org","$d needs to be cleaned",$outfull) if length($out) > 5;
+    #email("zack.ramjan\@vai.org","$d needs to be cleaned", $outfull) if length($out) > 5;
 }
 
 

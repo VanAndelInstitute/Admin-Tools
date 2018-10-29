@@ -3,7 +3,7 @@
 
 system("bash -l -c /primary/vari/admin/tools/pbsnodezParsable/pbsnodezParsable > /var/www/html/pbsnodezTxt.txt.new");
 system("bash -l -c \"qstat -a | tail -n +6\" > /var/www/html/qstat.txt.new");
-system("cp /primary/vari/admin/tools/quotaGraph/quotatable.txt /var/www/html/quotatable.txt");
+system("cp /primary/vari/admin/gpfs-tools/quotaGraph/quotatable.txt /var/www/html/quotatable.txt");
 
 checkAndReplace("/var/www/html/pbsnodezTxt.txt.new","/var/www/html/pbsnodezTxt.txt");
 checkAndReplace("/var/www/html/qstat.txt.new","/var/www/html/qstat.txt");

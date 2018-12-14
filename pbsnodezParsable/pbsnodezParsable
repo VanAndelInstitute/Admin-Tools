@@ -26,6 +26,12 @@ system("echo $diskTotal > /primary/vari/admin/tools/pbsnodezParsable/lastDu");
 my $lastJobID = `qmgr -c "p s" |grep next_job_number`;
 $lastJobID =~ /.+ (\d+)$/;
 $lastJobID = $1;
+
+open HAND, '<', "/primary/vari/software/pbsPretty/nodes.txt";
+%nodeClass = map {chomp; split /\t+/} (<HAND>);
+
+
+
 $output = `pbsnodes`;
 $zstatout = `/primary/vari/software/zacks_usc_devel/zacks_PBS_Tools/zstat.pl all`;
 foreach my $line (split '\n', $zstatout)
@@ -99,7 +105,8 @@ foreach $k (sort keys %nodeprops)
 		$k=~ s/\-//g;
 		push @jobsIds, $k;	
 	}
-	print join(",",@users) . "\t" . join(",",@coresUsed) . "\t" . join(",",@jobsIds);
+	print join(",",@users) . "\t" . join(",",@coresUsed) . "\t" . join(",",@jobsIds) . "\t";
+	print "$nodeprops{$k}{state}\t$nodeClass{$k}";
 
 	print "\n";
 }

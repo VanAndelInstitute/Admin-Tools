@@ -65,8 +65,8 @@ foreach  $n (@nodes)
 
 
 my $totalLoad = 0.0;
-print `cat /primary/vari/admin/tools/pbsnodezParsable/loadHistory | tr \'\\n\' \'\\t\'`;
-print `cat /primary/vari/admin/tools/pbsnodezParsable/diskHistory | tr \'\\n\' \'\\t\'`;
+print `cat /primary/vari/admin/tools/pbsnodezParsable/loadHistory | tr \'\\n\' \'\\t\'` . "\n";
+print `cat /primary/vari/admin/tools/pbsnodezParsable/diskHistory | tr \'\\n\' \'\\t\'` . "\n";
 foreach $k (sort keys %nodeprops)
 {
 	my %nodejobs;

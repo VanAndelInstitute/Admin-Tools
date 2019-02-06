@@ -16,7 +16,7 @@ logger PBS_CLEAN_NODE PBS_CLEAN_NODE called with args : $1 $2  and detected node
 if [[ "$joblist" == "$1" ]]; then
   process_list=$(pgrep -u $2 | xargs)
   killall -u $2
-  if [[ "$process_list" != ""]]; then
+  if [[ "$process_list" != "" ]]; then
     logger PBS_CLEAN_NODE Ended $process_list owned by $2 on $HOSTNAME
   fi
 fi

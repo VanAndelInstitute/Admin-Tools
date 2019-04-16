@@ -33,7 +33,8 @@ open HAND, '<', "/primary/vari/software/pbsPretty/nodes.txt";
 
 
 $output = `pbsnodes`;
-$zstatout = `/primary/vari/software/zacks_usc_devel/zacks_PBS_Tools/zstat.pl all`;
+#$zstatout = `/primary/vari/software/zacks_usc_devel/zacks_PBS_Tools/zstat.pl all`;
+$zstatout = `/primary/vari/software/pbsPretty/zstat`;
 foreach my $line (split '\n', $zstatout)
 {
 	chomp $line;

@@ -10,15 +10,15 @@
 #
 ################################################################################################################################
 
-#!/bin/bash
 joblist=$(/cm/shared/apps/torque/6.0.2/bin/pbsnodes $HOSTNAME | grep "jobs = " | awk '{print $3}' | sed -e 's/.master.cm.cluster//g' -e 's/[[:digit:]]\+\///g' -e 's/[[:digit:]]\+\-//g')
-logger PBS_CLEAN_NODE PBS_CLEAN_NODE called with args : $1 $2  and detected node is running job $joblist
+logger PBS_CLEAN_NODE called with args: $1 $2  and detected node is running job $joblist
 if [[ "$joblist" == "$1" ]]; then
   process_list=$(pgrep -u $2 | xargs)
   killall -u $2
-  if [[ "$process_list" != ""]]; then
+  if [[ "$process_list" != "" ]]; then
     logger PBS_CLEAN_NODE Ended $process_list owned by $2 on $HOSTNAME
   fi
 fi
 logger PBS_CLEAN_NODE Done cleaning up
 exit 0
+

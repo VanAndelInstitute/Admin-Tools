@@ -10,7 +10,7 @@ use Net::SMTP;
 #
 ##############################################################
 
-@dirs = ( "/primary/instruments/sequencing/illumina/incoming/.trash", "/primary/instruments/iscan/.trash", "/primary/projects/genomicscore/.trash","/primary/instruments/sequencing/novaseq/.trash");
+@dirs = ( "/primary/instruments/sequencing/illumina/incoming/.trash", "/primary/instruments/iscan/.trash", "/primary/projects/genomicscore/.trash","/primary/instruments/sequencing/novaseq/.trash", "/primary/instruments/sequencing/iSeq/.trash");
 
 
 for my $d (@dirs)

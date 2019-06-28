@@ -80,7 +80,8 @@ foreach $k (sort keys %nodeprops)
 		my $walltime = $zstat{$jobName}[4]; 
 		my $load = $detailedProps{loadave}; 
 		my @walltimeHour = split(":",$walltime);
-		if($walltimeHour[1] >= 2 && $load < "0.02" &&  grep( /^$queueName$/, @QUEUES ))
+		print STDERR "inspecting $jobName $userName $queueName $load $walltime\n" if $DEBUG;
+		if($walltimeHour[1] >= 2 && 0.02 >= $load  &&  grep( /^$queueName$/, @QUEUES ))
 		{ 
 			print STDERR "testing idleness for $jobName $userName $queueName $load $walltime\n" if $DEBUG;
 			my $returnValues = 0;
@@ -123,8 +124,8 @@ sub checkMetric
 		$line =~ /([0-9\.]+)\D*$/;
 		my $metric = $1;
 		
-		print STDERR "\t$node\.$metricName testing if $metric > $cutoff\n" if $DEBUG;
-		print STDERR "\tNODE IS NOT IDLE ($metric > $cutoff)" if $metric > $cutoff && $DEBUG;
+		print STDERR "\t\t$node\.$metricName testing if $metric > $cutoff\n" if $DEBUG;
+		print STDERR "\t\t\tNODE IS NOT IDLE ($metric > $cutoff)\n" if $metric > $cutoff && $DEBUG;
 		return 1 if $metric > $cutoff;
 	}
 	return 0;

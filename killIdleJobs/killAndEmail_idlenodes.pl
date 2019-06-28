@@ -98,7 +98,7 @@ foreach $k (sort keys %nodeprops)
 				$msg .= "For questions or concerns, please contact hpc3\@vai.org\n";
 				#email("$userName\@vai.org","HPC3 automatic idle job alert for job #$jobName ",$msg); 
 				email("zack.ramjan\@vai.org","HPC3 IDLE KILL job #$jobName: $userName\@vai.org ",$msg); 
-				killJob("$userName running pbs job# $jobName on $nodeName will be killed"); 
+				killJob($jobName,"$userName running pbs job# $jobName on $nodeName will be killed"); 
 			}
 		}
 	}
@@ -135,6 +135,9 @@ sub killJob
 	my $jobID = shift @_;
 	system("logger PBS_KILL_IDLE " . join(" ",@_) );
 	print STDERR "KILLING JOB DUE TO VIOLATION\n" if $DEBUG;
+	print STDERR "qdel $jobID\n" if $DEBUG;
+	#system("qdel $jobID");
+
 }
 
 

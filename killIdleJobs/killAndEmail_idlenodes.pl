@@ -14,10 +14,10 @@ use Net::SMTP;
 ##############################################################
 my $DEBUG = 1 if $ARGV[0];
 $DEPTH = "2h";
-#@METRICS = ("LoadFive","LoadOne","BytesRecv:eth0","BytesRecv:eth0","BytesRecv:ens1f1","BytesRecv:eth2");
-##@CUTOFFS = (0.5,0.5,20,20,20,20);
-@METRICS = ("LoadFive","LoadOne","LoadFifteen");
-@CUTOFFS = (0.5,0.5,0.5);
+@METRICS = ("LoadFive","LoadOne","BytesRecv:eth0","BytesRecv:eth0","BytesRecv:ens1f1","BytesRecv:eth2");
+@CUTOFFS = (0.5,0.5,20000,20000,20000,20000);
+#@METRICS = ("LoadFive","LoadOne","LoadFifteen");
+#@CUTOFFS = (0.5,0.5,0.5);
 @QUEUES = ("longq","shortq","gpu");
 
 
@@ -97,7 +97,7 @@ foreach $k (sort keys %nodeprops)
 				$msg .= "these jobs to ensure that resources are used effeciently.\n\n";
 				$msg .= "For questions or concerns, please contact hpc3\@vai.org\n";
 				#email("$userName\@vai.org","HPC3 automatic idle job alert for job #$jobName ",$msg); 
-				email("zack.ramjan\@vai.org","HPC3 IDLE KILL job #$jobName: $userName\@vai.org ",$msg); 
+				email("hpcadmins\@vai.org","HPC3 IDLE KILL job #$jobName: $userName\@vai.org ",$msg); 
 				killJob($jobName,"$userName running pbs job# $jobName on $nodeName will be killed"); 
 			}
 		}
@@ -111,7 +111,7 @@ sub checkMetric
 	my $node = shift @_;
 	my $metricName = shift @_;
 	my $cutoff = shift @_;
-	my $cmd = "cmsh --command \"device dumpmetricdata -$DEPTH now  $metricName $node\"";
+	my $cmd = "cmsh --command \"device dumpmetricdata -$DEPTH now --raw  $metricName $node\"";
 	print "\t$cmd\n" if $DEBUG;
 	my @metricListRaw = `$cmd`;
 	shift @metricListRaw;

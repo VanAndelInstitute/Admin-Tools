@@ -91,14 +91,14 @@ foreach $k (sort keys %nodeprops)
 				killJob($jobName);
 				my $msg = "Dear $userName,\n\n";
 				$msg .= "This is an automated  email notifying you that your HPC3 Job #$jobName on $nodeName ";
-				$msg .= "was idle for over 2 hours (system load=0.00) and has new been stopped and deleted\n";
-				$msg .= "\n\n";
+				$msg .= "was idle for over 2 hours (system load=0). As of 5/24/19 and based upon widespread facultly and staff feedbeack, ";
+				$msg .= "jobs that are idle for more than 2 hours will be stopped to ensure HPC resources are used effeciently.\n";
 				$msg .= "An idle job is a job that has been allocated CPU cores and is running on a compute node, ";
-				$msg .= "yet is not performing any computation. In response to community demand, HPC will now end ";
-				$msg .= "these jobs to ensure that resources are used effeciently.\n\n";
-				$msg .= "For questions or concerns, please contact hpc3\@vai.org\n";
+				$msg .= "yet is not performing any computation.\n\n";
+				$msg .= "For questions or concerns, please contact hpc3\@vai.org\n\n";
+                $msg .= "https://vanandelinstitute.sharepoint.com/sites/SC/SitePages/HPC3-High-Performance-Cluster-and-Cloud-Computing.aspx\n";
 				#email("$userName\@vai.org","HPC3 automatic idle job alert for job #$jobName ",$msg); 
-				email("hpcadmins\@vai.org","HPC3 IDLE KILL job #$jobName: $userName\@vai.org ",$msg); 
+				email("zack.ramjan\@vai.org","HPC3 IDLE KILL job #$jobName: $userName\@vai.org ",$msg); 
 				killJob($jobName,"$userName running pbs job# $jobName on $nodeName will be killed"); 
 			}
 		}
@@ -106,7 +106,7 @@ foreach $k (sort keys %nodeprops)
 }
 
 
-
+#check bright for the supplied metric. RETURN 0 if all values where below cutuff. RETURN 1 if we have a value that was above the idle cutoff
 sub checkMetric
 {
 	my $node = shift @_;
@@ -116,6 +116,12 @@ sub checkMetric
 	print "\t$cmd\n" if $DEBUG;
 	my @metricListRaw = `$cmd`;
 	shift @metricListRaw;
+	
+	if ($#metricListRaw < 50)
+	{
+		print STDERR "\t\tNot enough datapoints for qc metric: $metricName has $#metricListRaw values\n" if $DEBUG;
+		return 1;
+	}
 
 	for (@metricListRaw)
 	{

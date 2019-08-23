@@ -96,7 +96,8 @@ foreach $k (sort keys %nodeprops)
 				$msg .= "An idle job is a job that has been allocated CPU cores and is running on a compute node, ";
 				$msg .= "yet is not performing any computation.\n\n";
 				$msg .= "For questions or concerns, please contact hpc3\@vai.org\n\n";
-                $msg .= "https://vanandelinstitute.sharepoint.com/sites/SC/SitePages/HPC3-High-Performance-Cluster-and-Cloud-Computing.aspx\n";
+                $msg .= "https://vanandelinstitute.sharepoint.com/sites/SC/SitePages/HPC3-High-Performance-Cluster-and-Cloud-Computing.aspx\n\n";
+                $msg .= `ssh $nodeName sar -q`;
 				#email("$userName\@vai.org","HPC3 automatic idle job alert for job #$jobName ",$msg); 
 				email("6926e14e.vai.org\@amer.teams.ms","HPC3 IDLE KILL job #$jobName: $userName\@vai.org ",$msg); 
 				killJob($jobName,"$userName running pbs job# $jobName on $nodeName will be killed"); 
@@ -112,11 +113,11 @@ sub checkMetric
 	my $node = shift @_;
 	my $metricName = shift @_;
 	my $cutoff = shift @_;
-	my $cmd = "ssh $node sar -q | grep -v blocked | tail -n 13";
+	my $cmd = "ssh $node sar -q | grep -v blocked | tail -n 14 | head -n 13 ";
 	print "\t$cmd\n" if $DEBUG;
 	my @metricListRaw = `$cmd`;
 	
-	if ($#metricListRaw < 12)
+	if ($#metricListRaw < 13)
 	{
 		print STDERR "\t\tNot enough datapoints for qc metric: $metricName has $#metricListRaw values\n" if $DEBUG;
 		return 1;

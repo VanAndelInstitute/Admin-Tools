@@ -88,10 +88,9 @@ foreach $k (sort keys %nodeprops)
 			$returnValues += checkMetric($nodeName,$METRICS[$_],$CUTOFFS[$_]) for (0..$#METRICS);
 			unless ($returnValues)
 			{
-				killJob($jobName);
 				my $msg = "Dear $userName,\n\n";
 				$msg .= "This is an automated  email notifying you that your HPC3 Job #$jobName on $nodeName ";
-				$msg .= "was idle for over 2 hours (system load=0). As of 5/24/19 and based upon widespread facultly and staff feedbeack, ";
+				$msg .= "was idle for over 2 hours. As of 5/24/19, ";
 				$msg .= "jobs that are idle for more than 2 hours will be stopped to ensure HPC resources are used effeciently.\n";
 				$msg .= "An idle job is a job that has been allocated CPU cores and is running on a compute node, ";
 				$msg .= "yet is not performing any computation.\n\n";
@@ -117,7 +116,7 @@ sub checkMetric
 	print "\t$cmd\n" if $DEBUG;
 	my @metricListRaw = `$cmd`;
 	
-	if ($#metricListRaw < 13)
+	if ($#metricListRaw < 12)
 	{
 		print STDERR "\t\tNot enough datapoints for qc metric: $metricName has $#metricListRaw values\n" if $DEBUG;
 		return 1;

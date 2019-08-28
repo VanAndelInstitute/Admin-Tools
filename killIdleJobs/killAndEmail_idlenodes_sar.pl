@@ -19,7 +19,7 @@ $DEPTH = "2h";
 #@METRICS = ("LoadFive","LoadOne","LoadFifteen");
 #@CUTOFFS = (0.5,0.5,0.5);
 @QUEUES = ("longq","shortq","gpu");
-
+$debugMSG = "";
 
 $output = `/cm/shared/apps/torque/current/bin/pbsnodes`;
 $zstatout = `/primary/vari/software/pbsPretty/zstat`;
@@ -80,10 +80,10 @@ foreach $k (sort keys %nodeprops)
 		my $walltime = $zstat{$jobName}[4]; 
 		my $load = $detailedProps{loadave}; 
 		my @walltimeHour = split(":",$walltime);
-		print STDERR "inspecting $jobName $userName $queueName $load $walltime\n" if $DEBUG;
+		&printDebug("inspecting $jobName $userName $queueName $load $walltime\n"); 
 		if($walltimeHour[1] >= 2 && 0.02 >= $load  &&  grep( /^$queueName$/, @QUEUES ))
 		{ 
-			print STDERR "testing idleness for $jobName $userName $queueName $load $walltime\n" if $DEBUG;
+			&printDebug("testing idleness for $jobName $userName $queueName $load $walltime\n"); 
 			my $returnValues = 0;
 			$returnValues += checkMetric($nodeName,$METRICS[$_],$CUTOFFS[$_]) for (0..$#METRICS);
 			unless ($returnValues)
@@ -96,10 +96,12 @@ foreach $k (sort keys %nodeprops)
 				$msg .= "yet is not performing any computation.\n\n";
 				$msg .= "For questions or concerns, please contact hpc3\@vai.org\n\n";
                 $msg .= "https://vanandelinstitute.sharepoint.com/sites/SC/SitePages/HPC3-High-Performance-Cluster-and-Cloud-Computing.aspx\n\n";
-                $msg .= `ssh $nodeName sar -q`;
 				#email("$userName\@vai.org","HPC3 automatic idle job alert for job #$jobName ",$msg); 
-				email("6926e14e.vai.org\@amer.teams.ms","HPC3 IDLE KILL job #$jobName: $userName\@vai.org ",$msg); 
+				email("zack.ramjan\@vai.org","HPC3 IDLE KILL job #$jobName: $userName ",$msg); 
 				killJob($jobName,"$userName running pbs job# $jobName on $nodeName will be killed"); 
+                $msg .= `ssh $nodeName sar -q`;
+                $msg .= $debugMSG;
+				email("6926e14e.vai.org\@amer.teams.ms","HPC3 IDLE KILL job #$jobName: $userName\@vai.org ",$msg); 
 			}
 		}
 	}
@@ -113,12 +115,12 @@ sub checkMetric
 	my $metricName = shift @_;
 	my $cutoff = shift @_;
 	my $cmd = "ssh $node sar -q | grep -v blocked | tail -n 14 | head -n 13 ";
-	print "\t$cmd\n" if $DEBUG;
+	&printDebug("\t$cmd\n");
 	my @metricListRaw = `$cmd`;
 	
 	if ($#metricListRaw < 12)
 	{
-		print STDERR "\t\tNot enough datapoints for qc metric: $metricName has $#metricListRaw values\n" if $DEBUG;
+		&printDebug("\t\tNot enough datapoints for qc metric: $metricName has $#metricListRaw values\n");
 		return 1;
 	}
 
@@ -128,8 +130,8 @@ sub checkMetric
 		chomp @line;
 		my $metric = $line[5];
 		
-		print STDERR "\t\t$node\.$metricName testing if $metric > $cutoff\n" if $DEBUG;
-		print STDERR "\t\t\tNODE IS NOT IDLE ($metric > $cutoff)\n" if $metric > $cutoff && $DEBUG;
+		&printDebug("\t\t$node\.$metricName testing if $metric > $cutoff\t[". join(" ", @line) . "]\n");
+		&printDebug("\t\t\tNODE IS NOT IDLE ($metric > $cutoff)\n") if $metric > $cutoff;
 		return 1 if $metric > $cutoff;
 	}
 	return 0;
@@ -139,8 +141,8 @@ sub killJob
 {
 	my $jobID = shift @_;
 	system("logger PBS_KILL_IDLE " . join(" ",@_) );
-	print STDERR "KILLING JOB DUE TO VIOLATION\n" if $DEBUG;
-	print STDERR "qdel $jobID\n" if $DEBUG;
+	&printDebug("KILLING JOB DUE TO VIOLATION\n");
+	&printDebug("qdel $jobID\n");
 	#system("qdel $jobID");
 
 }
@@ -165,4 +167,11 @@ sub email
 	     print "Error: ", $smtp->message();
 	    }
 	    $smtp->quit;
+} 
+
+sub printDebug 
+{
+  my $msg = join(" ",@_);  
+  print STDERR $msg if $DEBUG;
+  $debugMSG .= $msg;
 }

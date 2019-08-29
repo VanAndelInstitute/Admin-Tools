@@ -17,6 +17,7 @@ $PROJECTSDIR = "/primary/projects";
 $PI = $ARGV[0] || die "must supply lab name";
 -e "/primary/projects/$PI" || die  "must supply valid lab name";
 length($PI) > 1 || die  "must supply valid lab name";
+$DEBUG = 1 if $ARGV[1];
 
 makeDir("$PROJECTSDIR/$PI");
 
@@ -53,5 +54,5 @@ sub runcmd{
         my $cmd=shift @_;
         my $caller=(caller(1))[3];
         print STDERR "$caller\t$cmd\n";
-        system($cmd);
+        system($cmd) unless $DEBUG;
 }

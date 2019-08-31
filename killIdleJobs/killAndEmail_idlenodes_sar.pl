@@ -129,6 +129,11 @@ sub checkMetric
 		my @line = split(/\s\s+/);
 		chomp @line;
 		my $metric = $line[5];
+        if ($metric !~ /\d+\.\d+/)
+        {
+            &printDebug("\t\t datapoint was not a number: $metricName has $#metricListRaw values\n");
+            return 1;
+        }
 		
 		&printDebug("\t\t$node\.$metricName testing if $metric > $cutoff\t[". join(" ", @line) . "]\n");
 		&printDebug("\t\t\tNODE IS NOT IDLE ($metric > $cutoff)\n") if $metric > $cutoff;

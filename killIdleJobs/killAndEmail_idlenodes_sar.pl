@@ -97,7 +97,7 @@ foreach $k (sort keys %nodeprops)
 				$msg .= "For questions or concerns, please contact hpc3\@vai.org\n\n";
                 $msg .= "https://vanandelinstitute.sharepoint.com/sites/SC/SitePages/HPC3-High-Performance-Cluster-and-Cloud-Computing.aspx\n\n";
 				#email("$userName\@vai.org","HPC3 automatic idle job alert for job #$jobName ",$msg); 
-				email("zack.ramjan\@vai.org","HPC3 IDLE KILL job #$jobName: $userName ",$msg); 
+				email("$userName\@vai.org","HPC auto idle job stopped #$jobName: $userName ",$msg); 
 				killJob($jobName,"$userName running pbs job# $jobName on $nodeName will be killed"); 
                 $msg .= `ssh $nodeName sar -q`;
                 $msg .= $debugMSG;
@@ -148,7 +148,7 @@ sub killJob
 	system("logger PBS_KILL_IDLE " . join(" ",@_) );
 	&printDebug("KILLING JOB DUE TO VIOLATION\n");
 	&printDebug("qdel $jobID\n");
-	#system("qdel $jobID");
+	system("qdel $jobID");
 
 }
 

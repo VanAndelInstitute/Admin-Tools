@@ -16,9 +16,8 @@ my $DEBUG = 1 if $ARGV[0];
 $DEPTH = "2h";
 @METRICS = ("ldavg-15");
 @CUTOFFS = (0.05);
-#@METRICS = ("LoadFive","LoadOne","LoadFifteen");
-#@CUTOFFS = (0.5,0.5,0.5);
 @QUEUES = ("longq","shortq","gpu");
+%KILLED_JOBS;
 $debugMSG = "";
 
 $output = `/cm/shared/apps/torque/current/bin/pbsnodes`;
@@ -86,7 +85,7 @@ foreach $k (sort keys %nodeprops)
 			&printDebug("testing idleness for $jobName $userName $queueName $load $walltime\n"); 
 			my $returnValues = 0;
 			$returnValues += checkMetric($nodeName,$METRICS[$_],$CUTOFFS[$_]) for (0..$#METRICS);
-			unless ($returnValues)
+			unless ($returnValues || $KILLED_JOBS{$jobName})
 			{
 				my $msg = "Dear $userName,\n\n";
 				$msg .= "This is an automated  email notifying you that your HPC3 Job #$jobName on $nodeName ";
@@ -102,6 +101,7 @@ foreach $k (sort keys %nodeprops)
                 $msg .= `ssh $nodeName sar -q`;
                 $msg .= $debugMSG;
 				email("6926e14e.vai.org\@amer.teams.ms","HPC3 IDLE KILL job #$jobName: $userName\@vai.org ",$msg); 
+                $KILLED_JOBS{$jobName} = $userName;
 			}
 		}
 	}
@@ -148,7 +148,7 @@ sub killJob
 	system("logger PBS_KILL_IDLE " . join(" ",@_) );
 	&printDebug("KILLING JOB DUE TO VIOLATION\n");
 	&printDebug("qdel $jobID\n");
-	system("qdel $jobID");
+	system("/cm/shared/apps/torque/6.1.3/bin/qdel $jobID");
 
 }
 

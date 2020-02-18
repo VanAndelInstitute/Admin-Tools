@@ -4,3 +4,4 @@
 /primary/vari/admin/tools/genomicsCoreFileMgmt/rsync_instruments_sequencing.sh
 /primary/vari/admin/tools/genomicsCoreFileMgmt/rsync_instruments_novaseq.sh
 /primary/vari/admin/tools/genomicsCoreFileMgmt/rsync_instruments_iseq.sh
+/primary/vari/admin/tools/genomicsCoreFileMgmt/rsync_instruments_minion.sh

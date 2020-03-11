@@ -27,7 +27,7 @@ for my $d (@dirs)
 sub email
 {
 	my $toLine = shift @_;
-	my $from = "run.watch\@hpc.vai.org";
+	my $from = "run.watch\@vai.org";
 	my $subject = shift @_;
 	my $message = shift @_;
 	my $smtp = Net::SMTP->new('smtp.vai.org');

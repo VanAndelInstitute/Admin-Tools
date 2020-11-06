@@ -5,3 +5,5 @@
 /primary/vari/admin/tools/genomicsCoreFileMgmt/rsync_instruments_novaseq.sh
 /primary/vari/admin/tools/genomicsCoreFileMgmt/rsync_instruments_iseq.sh
 /primary/vari/admin/tools/genomicsCoreFileMgmt/rsync_instruments_minion.sh
+/primary/vari/admin/tools/genomicsCoreFileMgmt/notifyFileAge.pl
+/primary/vari/admin/tools/genomicsCoreFileMgmt/moveFilesToAWSStaging.pl

@@ -31,8 +31,9 @@ for my $d (@dirs)
     for $movedDir (@moveDirList)
     {
         next unless -e $movedDir && -d $movedDir;
-        print "mv $movedDir ../$archiveDir\n"
+        system "mv \"$movedDir\" \"../$archiveDir\""
     }
+    system("chown -R \"marie.adams:sequencing technology\" ../$archiveDir") if -d "../$archiveDir";
 }
 
 

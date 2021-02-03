@@ -23,7 +23,7 @@ system("mkdir $WORKDIR");
 my $listFile = "$WORKDIR/$TIME";
 my $listFileParts = $TIME . "PART";
 my $SRC = "/remote/k3titan/Dosefractions/";
-my $DEST = "/primary/instruments/cryoem/titan/Dosefractions";
+my $DEST = "/primary/instruments/cryoem/titan/DoseFractions";
 #################
 
 

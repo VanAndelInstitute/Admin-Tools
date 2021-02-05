@@ -77,7 +77,7 @@ wait() for @parts;
 
 #delete files older than 4 hours
 
-runcmd("find /remote/k3titan/Dosefractions -mmin +1440 -type f -exec rm  {} \\;");
+runcmd("find /remote/k3titan/Dosefractions -iname \"*.tif\" -mmin +1440 -type f -exec rm  {} \\;");
 
 #cleanup
 sub runcmd{

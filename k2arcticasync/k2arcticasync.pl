@@ -77,7 +77,7 @@ wait() for @parts;
 
 #delete files older than 4 hours
 
-runcmd("find /remote/k2arctica/Dosefractions -mmin +240 -type f -exec rm  {} \\;");
+runcmd("find /remote/k2arctica/Dosefractions -iname \"*.tif\" -mmin +240 -type f -exec rm  {} \\;");
 
 #cleanup
 sub runcmd{

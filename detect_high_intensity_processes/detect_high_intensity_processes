@@ -96,8 +96,8 @@ function process_ps(){
         msg6="HPC team\nhpc3@vai.org"
         
         send="$msg$msg1$msg2$msg3$msg4$msg5$msg6"
-        #grep -qF -- "$line" "$file" || send_mail "$send" "$fname ($pid)" "$user"
-        grep -qF -- "$line" "$file" || send_email "$send" "$fname ($pid)" 
+        grep -qF -- "$line" "$file" || send_mail "$send" "$fname ($pid)" "$user"
+        #grep -qF -- "$line" "$file" || send_email "$send" "$fname ($pid)" 
       fi
 
       d=$(date +%Y%m%d%H%M)
@@ -164,8 +164,7 @@ function send_email(){
   if [[ "$3" == "" ]]; then
     printf "$message" | mail -v -s "$subject" $admin_user_email
   else
-    printf "noop"
-    #printf "$message" | mail -v -s "$subject" $user_email,$admin_user_email
+    printf "$message" | mail -v -s "$subject" $user_email,$admin_user_email
   fi
 }
 

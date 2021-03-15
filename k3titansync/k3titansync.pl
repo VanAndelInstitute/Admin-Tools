@@ -15,15 +15,15 @@ use strict;
 
 
 #SETTINGS
-my $RSYNC = "/primary/vari/software/rsync/3.1.2/bin/rsync";
+my $RSYNC = "/varidata/research/software/rsync/3.1.2/bin/rsync";
 my $THREADS = 10;
 my $TIME = int (gettimeofday * 1000);
-my $WORKDIR = "/primary/vari/admin/tools/k3titansync/logs/$TIME";
+my $WORKDIR = "/varidata/research/admin/tools/k3titansync/logs/$TIME";
 system("mkdir $WORKDIR");
 my $listFile = "$WORKDIR/$TIME";
 my $listFileParts = $TIME . "PART";
 my $SRC = "/remote/k3titan/Dosefractions/";
-my $DEST = "/primary/instruments/cryoem/titan/DoseFractions";
+my $DEST = "/varidata/research/instruments/cryoem/titan/DoseFractions";
 #################
 
 

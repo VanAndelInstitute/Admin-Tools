@@ -35,7 +35,7 @@ die "already running\n" if $numprocs != 1;
 
 
 #make sure src and dest exist and are mounted
-die unless length(`ls $SRC`) > 5;
+die "src dir seems to be empty " . length(`ls $SRC`) unless length(`ls $SRC`) > 3;
 die unless -e $SRC;
 die unless -e $DEST;
 die unless -e $WORKDIR;

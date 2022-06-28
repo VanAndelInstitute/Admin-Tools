@@ -26,7 +26,7 @@ my $doACL = shift @ARGV;
 
 die if -e "/varidata/research/projects/$pi";
 
-runcmd("$CR research $pi");
+runcmd("$CR research $pi --inode-space projects");
 
 runcmd("$LINK research $pi -J /varidata/research/projects/$pi");
 

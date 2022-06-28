@@ -14,6 +14,9 @@ while (1)
 	sleep $sleep;
 	my $rx2 = &getBytes(`$rx`);
 	my $tx2 = &getBytes(`$tx`);
+	my $date = `date`;
+	chomp $date;
+	print "$date\t";
 	print "RX: " . (($rx2 - $rx1)/$sleep/1000000) . "\tMBs\t\t";
 	print "TX: " . (($tx2 - $tx1)/$sleep/1000000) . "\tMBs\n";
 

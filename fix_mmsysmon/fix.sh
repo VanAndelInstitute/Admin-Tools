@@ -4,4 +4,4 @@ if [ -d mmsysmon ]; then
   exit 0
 fi
 
-tar -xvf /varidata/research/admin/fix_mmsysmon/mmsysmon.tar
+tar -xvf /varidata/research/admin/tools/fix_mmsysmon/mmsysmon.tar

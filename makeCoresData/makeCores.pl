@@ -13,9 +13,9 @@ use File::stat;
 
 
 $COREDIR = "vari-core-generated-data";
-$PROJECTSDIR = "/primary/projects";
+$PROJECTSDIR = "/varidata/researcj/projects";
 $PI = $ARGV[0] || die "must supply lab name";
--e "/primary/projects/$PI" || die  "must supply valid lab name";
+-e "/varidata/research/projects/$PI" || die  "must supply valid lab name";
 length($PI) > 1 || die  "must supply valid lab name";
 $DEBUG = 1 if $ARGV[1];
 

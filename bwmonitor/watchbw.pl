@@ -1,24 +1,33 @@
 #!/usr/bin/perl
-$if = $ARGV[0] || die "specify a network interface";
-$sleep = $ARGV[1] || 10;
+$sleep = $ARGV[0] || 3;
+$if = $ARGV[1] ;
 
-$rx = "ifconfig $if | grep RX | grep pack";
-$tx = "ifconfig $if | grep TX |grep pack";
 
 print STDERR "watching $if for $sleep seconds...\n";
 
 while (1)
 {
-	my $rx1 = &getBytes(`$rx`);
-	my $tx1 = &getBytes(`$tx`);
+	my $rx1 = 0;	
+	my $tx1 = 0;	
+	my $rx2 = 0;	
+	my $tx2 = 0;	
+
+	@rx = `ifconfig $if | grep RX | grep pack`;
+	@tx = `ifconfig $if | grep TX |grep pack`;
+
+	$rx1 += &getBytes($_) for @rx;
+	$tx1 += &getBytes($_) for @tx;
 	sleep $sleep;
-	my $rx2 = &getBytes(`$rx`);
-	my $tx2 = &getBytes(`$tx`);
+
+	@rx = `ifconfig $if | grep RX | grep pack`;
+	@tx = `ifconfig $if | grep TX |grep pack`;
+	$rx2 += &getBytes($_) for @rx;
+	$tx2 += &getBytes($_) for @tx;
 	my $date = `date`;
 	chomp $date;
-	print "$date\t";
-	print "RX: " . (($rx2 - $rx1)/$sleep/1000000) . "\tMBs\t\t";
-	print "TX: " . (($tx2 - $tx1)/$sleep/1000000) . "\tMBs\n";
+	print "$date\t\t\t";
+	print "RX: " . int(($rx2 - $rx1)/$sleep/1000000) . " MBs\t";
+	print "TX: " . int(($tx2 - $tx1)/$sleep/1000000) . " MBs\n";
 
 }
 
@@ -27,6 +36,7 @@ while (1)
 sub getBytes
 {
 	my $s = shift @_;
+	#	print STDERR "-> $s\n";
 	$s =~ /bytes\s+(\d+)\s+/;
-	return $1;
+	return int($1);
 }

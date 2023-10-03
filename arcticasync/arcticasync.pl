@@ -43,6 +43,7 @@ die unless -e $WORKDIR;
 chdir $WORKDIR;
 
 #generate the exclude list
+system("touch $WORKDIR/excluded.list.txt");
 for my $e (glob("$SRC*"))
 {
 	my $ebase = basename($e);
@@ -52,6 +53,7 @@ for my $e (glob("$SRC*"))
 
 #get the list of files to transfer
 runcmd("$RSYNC --dry-run --safe-links -avxl --exclude-from \'$WORKDIR/excluded.list.txt\' $SRC $DEST | grep -v \"/\$\" | sort --random-sort  > $listFile");
+#runcmd("$RSYNC --dry-run --safe-links -avxl $SRC $DEST | grep -v \"/\$\" | sort --random-sort  > $listFile");
 
 #split the list into parts
 my $lineCount = `wc -l < $listFile`;
@@ -78,6 +80,10 @@ for my $p (@parts)
 
 #parent thread wait for all child threads
 wait() for @parts;
+
+#delete files older than 30 days
+
+runcmd("find /remote/arcticaRW  -mtime +30 -type f -exec rm  {} \\;");
 
 #fix ownership
 #runcmd("cd $DEST");
